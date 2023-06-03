@@ -9,4 +9,9 @@
 	<select id = "login" resultType="com.peachs.entity.AccountsInfo" parameterType="com.peachs.entity.AccountsInfo">
 		select * from accounts_info where user_id = #{user_id} and user_pw = #{user_pw}
 	</select>
+	
+	<insert id = "register" parameterType="com.peachs.entity.AccountsInfo">
+			insert into accounts_info (user_id,user_pw,user_name,user_com,user_job)
+		values(#{user_id},#{user_pw},#{user_name},#{user_com},#{user_job})
+	</insert>
 </mapper>

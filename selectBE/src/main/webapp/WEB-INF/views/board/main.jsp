@@ -31,6 +31,71 @@
 <link rel="manifest" href="/docs/5.2/assets/img/favicons/manifest.json">
 <link rel="mask-icon" href="/docs/5.2/assets/img/favicons/safari-pinned-tab.svg" color="#712cf9">
 <link rel="icon" href="/docs/5.2/assets/img/favicons/favicon.ico">
+
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+      	<script type="text/javascript">
+	  	$(document).ready(function(){
+			//Python과 연동하는 부분
+			 $("#python").click(function(){
+		           var form=$("#fileFrm")[0]; // form data의 0번 폼을 가지고옴
+		            var data=new FormData(form); // name=data(text), name=file(binary) 
+		            $.ajax({
+		               url : "http://127.0.0.1:5000/test", // flask server연동 url
+		               type : "post",
+		               data : data,    // var data 되어있는 위의 formData!를 데이터로 받아줌
+		               processData : false,
+		               contentType : false,
+		               cache : false,
+		               timeout : 60000, // 서버에 업로드될떄 업로드의 시간을 이정도를 넘어가면 timeout이 걸리도록 해주는거
+						// 1000=> 1초 60000=> 60초
+		               
+		               success : function(data){ 
+		                  $("#result").html("<img width='200px' height='200px' src='data:image/png;base64," + data.file + "'>");                                 
+		               },
+		               error : function(){ alert("error"); }
+		            });    
+		        });
+			
+		   	});
+  
+  		</script>
+  		
+	주석을 까먹음...ㅎㅎㅎ...
+	암튼 이거 그냥 VsCode에서 바로 돌리면 실행이 가능해짐
+  		from flask import Flask , request, render_template , make_response ,jsonify ## flask 라이브러리에서 Flask import
+		import numpy as np
+		import cv2
+		import base64
+		app = Flask(__name__)
+		@app.route('/test', methods=['POST'])
+		def rest_img_test():
+		     if request.method == 'POST':
+		         param = request.form.get('data')
+		         print(param)
+		         f = request.files['file']
+		         filestr = f.read()
+		
+		
+		         npimg = np.fromstring(filestr, np.uint8) # FileStorage의 이미지를 넘파이 배열로 만듬
+		         img = cv2.imdecode(npimg, cv2.IMREAD_COLOR) # 넘파일 배열을 이미지 배열로 변환함
+		         img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY) # 여기에서 처리를 하면 됨
+		
+		
+		         cv2.imwrite(f.filename, img)
+		         img_str = base64.b64encode(cv2.imencode('.jpg', img)[1]).decode()
+		         data = {"param": param, "file": img_str}
+		         response = make_response(jsonify(data))
+		         response.headers.add("Access-Control-Allow-Origin", "*")
+		     return response
+		if __name__ == "__main__":  
+		 app.run()
+  		
+  		
+  		
+  		
+
 <meta name="theme-color" content="#712cf9">
 
 
@@ -199,11 +264,19 @@
 
       </div>
       
-      <form action ="${cpath}/upload" method="post">
-        <input type="file" name = "file">
-        <button type = "submit">제출</button>
-      </form>
-      <canvas class="my-4 w-100" id="myChart" width="900" height="380">
+    <form enctype="multipart/form-data" method = "post" id = "fileFrm">
+    	<div class = "form-group">
+    		<label>이미지 이름 : </label>
+    		<input type = "text" name ="data" class = "form-control"/>
+    	</div>
+    	<div class = "form-group" >
+			<label>파일 : </label>    	
+    		<input type = "file" name = "file" class = "form-control"/>
+    	</div>
+    	<button type = "button" id = "python" class = "btn btn-sm btn-primary form-control">Python연동</button>
+    </form>
+    
+    <div id = "result">여기에 결과 이미지를 출력</div>
 
 
 

@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -37,4 +38,25 @@ public class AccountsInfoController {
 		}
 		return "redirect:/login";
 	}
+	
+	//-------------------------------회원가입--------------------------
+		@GetMapping("/register") 
+		public String register() {
+			
+			return "board/register";
+		}
+		
+		@PostMapping("/register") 
+		public String register(AccountsInfo mvo) {		
+//			// 중복 체크
+//			AccountsInfo existingUser = mapper.getUserByEmail(avo.getUser_id());
+//			if (existingUser != null) {
+//				// 이미 등록된 이메일 주소인 경우 사용자에게 안내 메시지를 제공하거나 적절한 조치를 취해야 함
+//				return "redirect:/register?error=duplicate";
+//			}
+			
+			mapper.register(mvo);
+		
+			return "redirect:/list"; 
+		}
 }
