@@ -6,4 +6,7 @@
 		select * from accounts_info
 	</select>
 	
+	<select id = "login" resultType="com.peachs.entity.AccountsInfo" parameterType="com.peachs.entity.AccountsInfo">
+		select * from accounts_info where user_id = #{user_id} and user_pw = #{user_pw}
+	</select>
 </mapper>

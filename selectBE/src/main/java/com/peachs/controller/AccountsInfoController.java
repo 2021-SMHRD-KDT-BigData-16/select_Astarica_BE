@@ -2,9 +2,12 @@ package com.peachs.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.peachs.entity.AccountsInfo;
@@ -20,7 +23,18 @@ public class AccountsInfoController {
 	public String list(Model model) {
 		List<AccountsInfo> list = mapper.getLists();
 		model.addAttribute("list", list);
-		return "board/home"; // flist.jsp --> 반환 값은 flist로 해야한다.
+		return "board/login"; // flist.jsp --> 반환 값은 flist로 해야한다.
 		// WEB-INF/views/list.jsp
+	}
+	
+	@RequestMapping("/login")
+	public String login(AccountsInfo mvo, HttpSession session) {
+		AccountsInfo user = mapper.login(mvo);
+		
+		if (user != null) {
+			session.setAttribute("mvo", user);
+			return "board/main";
+		}
+		return "redirect:/login";
 	}
 }
