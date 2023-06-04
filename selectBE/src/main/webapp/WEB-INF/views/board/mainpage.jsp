@@ -28,31 +28,31 @@
         <div class="navigation">
             <ul>
                 <li>
-                    <a href="#">
+                    <a href="${cpath}/mainpage">
                         <span class="icon"><i class="fa-solid fa-star-of-life" style="color: #ffffff;"></i></span>
                         <span class="title"><h2 class="logo-title">Select Astarica</h2></span>
                     </a>
                 </li>
                 <li>
-                    <a href="http://127.0.0.1:5500/main/html/home.html">
+                    <a href="${cpath}/mainpage">
                         <span class="icon"><ion-icon name="home-outline"></ion-icon></span>
                         <span class="title">HOME</span>
                     </a>
                 </li>
                 <li>
-                    <a href="http://127.0.0.1:5500/main/html/dashboard.html">
+                    <a href="${cpath}/dashboard">	
                         <span class="icon"><ion-icon name="bar-chart-outline"></ion-icon></span>
                         <span class="title">Dashboard</span>
                     </a>
                 </li>
                 <li>
-                    <a href="http://127.0.0.1:5500/main/html/analysis.html">
+                    <a href="${cpath}/analysis">
                         <span class="icon"><ion-icon name="documents-outline"></ion-icon></span>
                         <span class="title">ANALYSIS</span>
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="${cpath}/logout">
                         <span class="icon"><ion-icon name="log-out-outline"></ion-icon></span>
                         <span class="title">Sign Out</span>
                     </a>
