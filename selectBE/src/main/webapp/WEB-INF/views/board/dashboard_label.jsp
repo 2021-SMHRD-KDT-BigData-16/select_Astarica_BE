@@ -16,7 +16,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Responsive Admin Dashboard | Redesign</title>
+    <title>Select *</title>
     <link rel="stylesheet" href="${cpath}/resources/css/dashboard_label.css">
     <script src="https://kit.fontawesome.com/7872e4b187.js" crossorigin="anonymous"></script>
 </head>

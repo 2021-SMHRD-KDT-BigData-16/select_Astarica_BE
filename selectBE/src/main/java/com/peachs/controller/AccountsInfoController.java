@@ -24,7 +24,7 @@ public class AccountsInfoController {
 	public String list(Model model) {
 		List<AccountsInfo> list = mapper.getLists();
 		model.addAttribute("list", list);
-		return "board/login"; // flist.jsp --> 반환 값은 flist로 해야한다.
+		return "board/mainpage"; // flist.jsp --> 반환 값은 flist로 해야한다.
 		// WEB-INF/views/list.jsp
 	}
 	//------------------------------------------------------LOGIN USER---------------------------------------------------------//
@@ -65,7 +65,7 @@ public class AccountsInfoController {
 		
 			return "redirect:/list"; 
 		}
-		
+	
 		@GetMapping("/mainpage") 
 		public String mainpage() {
 			
