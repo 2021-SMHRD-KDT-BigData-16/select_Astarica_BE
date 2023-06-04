@@ -34,11 +34,17 @@ public class AccountsInfoController {
 		
 		if (user != null) {
 			session.setAttribute("mvo", user);
-			return "board/main";
+			return "board/mainpage";
 		}
 		return "redirect:/login";
 	}
-	
+	//------------------------------------------------------LOGOUT USER---------------------------------------------------------//
+		@RequestMapping("/logout")
+		public String loginout(HttpSession session) {
+			
+			session.invalidate();
+			return "redirect:/login";
+		}
 	//------------------------------------------------------REGISTER USER---------------------------------------------------------//
 		@GetMapping("/register") 
 		public String register() {
@@ -59,4 +65,31 @@ public class AccountsInfoController {
 		
 			return "redirect:/list"; 
 		}
+		
+		@GetMapping("/mainpage") 
+		public String mainpage() {
+			
+			return "board/mainpage";
+		}
+		@GetMapping("/dashboard") 
+		public String dashboard() {
+			
+			return "board/dashboard";
+		}
+		@GetMapping("/analysis") 
+		public String analysis() {
+			
+			return "board/analysis";
+		}
+		@GetMapping("/dashboard_model") 
+		public String dashboard_model() {
+			
+			return "board/dashboard_model";
+		}
+		@GetMapping("/dashboard_label") 
+		public String dashboard_label() {
+			
+			return "board/dashboard_label";
+		}
+		
 }
