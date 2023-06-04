@@ -19,7 +19,7 @@ import com.peachs.mapper.AccountsInfoMapper;
 public class AccountsInfoController {
 	@Autowired
 	private AccountsInfoMapper mapper;
-	
+	//------------------------------------------------------FISRT PAGE---------------------------------------------------------//
 	@RequestMapping("/list") // /list ---HandlerMapping---> 요청이 list() 메소드가 실행
 	public String list(Model model) {
 		List<AccountsInfo> list = mapper.getLists();
@@ -27,7 +27,7 @@ public class AccountsInfoController {
 		return "board/login"; // flist.jsp --> 반환 값은 flist로 해야한다.
 		// WEB-INF/views/list.jsp
 	}
-	
+	//------------------------------------------------------LOGIN USER---------------------------------------------------------//
 	@RequestMapping("/login")
 	public String login(AccountsInfo mvo, HttpSession session) {
 		AccountsInfo user = mapper.login(mvo);
@@ -39,7 +39,7 @@ public class AccountsInfoController {
 		return "redirect:/login";
 	}
 	
-	//-------------------------------회원가입--------------------------
+	//------------------------------------------------------REGISTER USER---------------------------------------------------------//
 		@GetMapping("/register") 
 		public String register() {
 			
