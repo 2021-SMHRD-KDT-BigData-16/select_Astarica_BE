@@ -127,6 +127,26 @@
                     <h2>DATA LIST</h2>
                         <a href="#" onclick="Dtoggle()" class="btn">+</a> 
                 </div>  
+                <div class="dataBox">
+                    <div class="datacard">
+                        <div class="iconBx">
+                            <ion-icon name="server-outline"></ion-icon>
+                        </div> 
+                        <div>
+                            <div class="dataName">Tag</div>
+                            <div class="date">2023-06-05</div>
+                        </div>
+                    </div>
+                    <div class="datacard">
+                        <div class="iconBx">
+                            <ion-icon name="server-outline"></ion-icon>
+                        </div> 
+                        <div>
+                            <div class="dataName">Tag</div>
+                            <div class="date">2023-06-05</div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <!-- 데이터 업로드 모달창 -->
