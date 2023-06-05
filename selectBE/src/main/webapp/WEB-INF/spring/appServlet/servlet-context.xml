@@ -21,6 +21,13 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 	
+	<!-- 2023.06.05 로컬에 파일을 업로드하기 위한 객체 및 Bean 등록 -->
+	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<beans:property name="maxUploadSize" value="10485760" />
+		<beans:property name="defaultEncoding" value="utf-8" />
+	</beans:bean>
+	<!-- 객체 및 Bean 등록 End -->
+	
 	<context:component-scan base-package="com.peachs.controller" />
 	
 	

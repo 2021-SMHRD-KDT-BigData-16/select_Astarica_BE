@@ -45,6 +45,13 @@
 			<param-value>/WEB-INF/spring/appServlet/servlet-context.xml
 			</param-value>
 		</init-param>
+		<!-- 2023.06.05. 로컬에 파일을 업로드하기 위한 multipart-config Start -->
+		<multipart-config>
+			<max-file-size>5242880</max-file-size>
+			<max-request-size>20971520</max-request-size>
+			<file-size-threshold>0</file-size-threshold>
+		</multipart-config>
+		<!-- multipart-config End -->
 		<load-on-startup>1</load-on-startup>
 	</servlet>
 

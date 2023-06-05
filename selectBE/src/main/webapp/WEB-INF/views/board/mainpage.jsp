@@ -167,9 +167,9 @@
                     </span>
                 </button>
             </div>
-                <form action="#" method="get" class="file_upload">
+                <form action="uploading" method="post" class="file_upload" enctype="multipart/form-data">
 		            <div class="popup-footer">
-        	            <input id="my-input" type="file" name="file" accept=".zip" multiple>              
+        	            <input id="my-input" type="file" name="file" accept=".zip">              
                     	<button id="my-button" onclick="onClickUpload();" button class="btn-primary">Upload</button>
                     	<button class="btn-secondary" onclick="Dtoggle()">Cancel</button>
             		</div>
