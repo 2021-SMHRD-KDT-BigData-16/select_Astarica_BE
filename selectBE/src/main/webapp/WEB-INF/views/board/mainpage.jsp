@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@page import="java.util.List"%>
 <%@page import="com.peachs.entity.AccountsInfo"%>
+<%@page import="com.peachs.entity.OriginDataInfo"%>
 <%@ taglib prefix ="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix ="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix ="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
@@ -126,28 +127,23 @@
                 <div class="cardHeader">
                     <h2>DATA LIST</h2>
                         <a href="#" onclick="Dtoggle()" class="btn">+</a> 
-                </div>  
-                <div class="dataBox">
-                    <div class="datacard">
-                        <div class="iconBx">
-                            <ion-icon name="server-outline"></ion-icon>
-                        </div> 
-                        <div>
-                            <div class="dataName">Tag</div>
-                            <div class="date">2023-06-05</div>
-                        </div>
-                    </div>
-                    <div class="datacard">
-                        <div class="iconBx">
-                            <ion-icon name="server-outline"></ion-icon>
-                        </div> 
-                        <div>
-                            <div class="dataName">Tag</div>
-                            <div class="date">2023-06-05</div>
-                        </div>
-                    </div>
                 </div>
-            </div>
+                <div class="dataBox">
+                <c:if test="${!empty works}">
+                	<c:forEach var="work" items="${works}">
+                		<div class="datacard">
+                        <div class="iconBx">
+                            <ion-icon name="server-outline"></ion-icon>
+                        </div> 
+                        <div>
+                            <div class="dataName">${work.od_name}</div>
+                            <div class="date">${work.od_date}</div>
+                        </div>
+                    </div>
+                	</c:forEach>
+                </c:if>
+                </div>
+               </div>
         </div>
         <!-- 데이터 업로드 모달창 -->
             <div id="popup">

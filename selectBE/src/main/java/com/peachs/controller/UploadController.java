@@ -2,22 +2,33 @@ package com.peachs.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 import java.util.UUID;
 
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.peachs.entity.AccountsInfo;
+import com.peachs.entity.OriginDataInfo;
+import com.peachs.mapper.OriginDataInfoMapper;
+
 @Controller
 public class UploadController {
 
+	@Autowired
+	public OriginDataInfoMapper o_mapper;
 	@GetMapping("/upload")
 	public void form() {}
 	
 	@PostMapping("/uploading")
-	public String upload(@RequestParam("file") MultipartFile file) {
+	public String upload(@RequestParam("file") MultipartFile file, HttpSession session, Model model) {
 		String fileRealName = file.getOriginalFilename(); //파일명을 얻어낼 수 있는 메서드!
 		long size = file.getSize(); //파일 사이즈
 		
@@ -36,8 +47,8 @@ public class UploadController {
 		System.out.println("확장자명" + fileExtension);
 
 		// File saveFile = new File(uploadFolder+"\\"+fileRealName); uuid 적용 전
-		
-		File saveFile = new File(uploadFolder+"\\"+uniqueName + fileExtension);  // 적용 후
+		String filePath = uploadFolder+"\\"+uniqueName + fileExtension;
+		File saveFile = new File(filePath);  // 적용 후
 		try {
 			file.transferTo(saveFile); // 실제 파일 저장메서드(filewriter 작업을 손쉽게 한방에 처리해준다.)
 		} catch (IllegalStateException e) {
@@ -45,6 +56,15 @@ public class UploadController {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		// 로그인 한 회원 정보 가져오기
+		AccountsInfo user= (AccountsInfo) session.getAttribute("mvo");
+		OriginDataInfo data = new OriginDataInfo();
+		data.setOd_name(fileRealName);
+		data.setUser_id(user.getUser_id());
+		data.setOd_path(filePath);
+		o_mapper.insert(data);
+		List<OriginDataInfo> works = o_mapper.getLists(user);
+		model.addAttribute("works", works);
 		return "board/mainpage";
 	}
 }

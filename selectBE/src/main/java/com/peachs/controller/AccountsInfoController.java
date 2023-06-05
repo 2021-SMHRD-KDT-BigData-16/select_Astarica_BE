@@ -12,13 +12,24 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.peachs.entity.AccountsInfo;
+import com.peachs.entity.OriginDataInfo;
 import com.peachs.mapper.AccountsInfoMapper;
+import com.peachs.mapper.OriginDataInfoMapper;
 
 
 @Controller
 public class AccountsInfoController {
 	@Autowired
 	private AccountsInfoMapper mapper;
+	
+	@Autowired
+	private OriginDataInfoMapper o_mapper; // 원본 데이터 DB 연결 Mapper
+	
+	@RequestMapping("/") // /list ---HandlerMapping---> 요청이 list() 메소드가 실행
+	public String first() {
+		return "board/login"; // flist.jsp --> 반환 값은 flist로 해야한다.
+		// WEB-INF/views/list.jsp
+	}
 	//------------------------------------------------------FISRT PAGE---------------------------------------------------------//
 	@RequestMapping("/list") // /list ---HandlerMapping---> 요청이 list() 메소드가 실행
 	public String list(Model model) {
@@ -29,11 +40,12 @@ public class AccountsInfoController {
 	}
 	//------------------------------------------------------LOGIN USER---------------------------------------------------------//
 	@RequestMapping("/login")
-	public String login(AccountsInfo mvo, HttpSession session) {
+	public String login(AccountsInfo mvo, HttpSession session, Model model) {
 		AccountsInfo user = mapper.login(mvo);
-		
 		if (user != null) {
+			List<OriginDataInfo> works = o_mapper.getLists(mvo);
 			session.setAttribute("mvo", user);
+			model.addAttribute("works", works);
 			return "board/mainpage";
 		}
 		return "redirect:/login";
