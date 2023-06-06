@@ -131,13 +131,14 @@
                 <div class="dataBox">
                 <c:if test="${!empty works}">
                 	<c:forEach var="work" items="${works}">
-                		<div class="datacard">
+                		<div class="datacard" onclick="data_load()">
                         <div class="iconBx">
                             <ion-icon name="server-outline"></ion-icon>
                         </div> 
                         <div>
                             <div class="dataName">${work.od_name}</div>
                             <div class="date">${work.od_date}</div>
+                            <input type="hidden" value="${work.od_path}">
                         </div>
                     </div>
                 	</c:forEach>
@@ -201,6 +202,11 @@
  
     <script>
         // MenuToggle
+        function data_load(){
+        	
+        	console.log();
+        };
+        
         let toggle = document.querySelector('.toggle');
         let navigation = document.querySelector('.navigation');
         let main = document.querySelector('.main');
@@ -208,7 +214,7 @@
         toggle.onclick = function(){
             navigation.classList.toggle('active');
             main.classList.toggle('active');
-        }
+        };
 
         // add hovered class in selected list item
         let list = document.querySelectorAll('.navigation li');
@@ -216,7 +222,7 @@
             list.forEach((item) =>
             item.classList.remove('hovered')); 
             this.classList.add('hovered')
-        }
+        };
         list.forEach((item) =>
         item.addEventListener('mouseover',activeLink));
 
@@ -225,7 +231,7 @@
             blur.classList.toggle('active')
             var popup = document.getElementById('popup');
             popup.classList.toggle('active')
-        }
+        };
 
         function onClickUpload(){
             let myInput = document.getElementById("my-input");
@@ -241,7 +247,7 @@
                 $('#my-button').removeAttr("onclick");
                 $('#my-button').text('Submit').attr("type","submit");
             };
-        }
+        };
 
     </script>
 </body>

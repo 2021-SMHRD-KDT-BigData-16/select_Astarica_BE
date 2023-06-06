@@ -39,7 +39,6 @@
                     </div> -->
                     <button type = "submit">Log in</button>
                     <div class="register">
-
                         <p>Don't have a account <a href="#">Register</a></p>
                     </div>
                 </form>
