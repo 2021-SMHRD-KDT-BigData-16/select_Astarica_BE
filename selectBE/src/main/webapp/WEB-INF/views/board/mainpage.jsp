@@ -131,14 +131,14 @@
                 <div class="dataBox">
                 <c:if test="${!empty works}">
                 	<c:forEach var="work" items="${works}">
-                		<div class="datacard" onclick="data_load()">
+                	<div class="datacard">
                         <div class="iconBx">
                             <ion-icon name="server-outline"></ion-icon>
                         </div> 
                         <div>
                             <div class="dataName">${work.od_name}</div>
                             <div class="date">${work.od_date}</div>
-                            <input type="hidden" value="${work.od_path}">
+                    		<input type="hidden" value="${work.od_path}">
                         </div>
                     </div>
                 	</c:forEach>
@@ -201,11 +201,31 @@
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
  
     <script>
-        // MenuToggle
-        function data_load(){
-        	
-        	console.log();
-        };
+	    $(document).ready(function() {
+	    	  $('.datacard').click(function() {
+	    	    var odPath = $(this).find('input[type=hidden]').val();
+	    	    console.log(odPath);
+	    	    
+	    	    
+			    $.ajax({
+			      url: 'http://127.0.0.1:5000/test', // Flask 엔드포인트의 URL을 입력하세요.
+			      type: 'POST',
+			      data: {od_path: odPath},
+			      success: function(response) {
+			        // Ajax 요청이 성공적으로 완료되었을 때 실행할 코드를 작성합니다.
+			        console.log('Success:', response);
+			      },
+			      error: function(xhr, status, error) {
+			        // Ajax 요청이 실패했을 때 실행할 코드를 작성합니다.
+			        console.error('Error:', error);
+			      }
+			    });
+	    	    
+			    
+			    
+	    	  });
+	    	});
+	    
         
         let toggle = document.querySelector('.toggle');
         let navigation = document.querySelector('.navigation');
