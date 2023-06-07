@@ -19,7 +19,7 @@ public class ImageController {
     @GetMapping("/image/{imageName}")
     public ResponseEntity<ByteArrayResource> loadImage(@PathVariable String imageName) throws IOException {
         // 로컬 파일 시스템의 이미지 경로
-        String imagePath = "C:/zip/" + imageName;
+        String imagePath = "C:/datazip/testzip/" + imageName;
 
         // 이미지 파일을 읽어서 byte 배열로 변환
         Path path = Paths.get(imagePath);
