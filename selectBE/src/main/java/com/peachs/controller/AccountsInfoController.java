@@ -2,6 +2,7 @@ package com.peachs.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -104,4 +105,10 @@ public class AccountsInfoController {
 			return "board/dashboard_label";
 		}
 		
+		@GetMapping("/test")
+		public String test(HttpServletRequest request) {
+			String temp = request.getParameter("data");
+			System.out.println(temp);
+			return "home";
+		}
 }

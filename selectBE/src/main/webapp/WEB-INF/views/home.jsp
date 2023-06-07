@@ -18,5 +18,13 @@
 	<h2>${in.user_com}</h2>
 	<h2>${in.user_job}</h2>
 </c:forEach>
+
+<script>
+const urlParams = new URLSearchParams(location.search);
+const jsonData = urlParams.get('data');
+
+const parsedData = JSON.parse(decodeURIComponent(jsonData));
+console.log(parsedData);
+</script>
 </body>
 </html>

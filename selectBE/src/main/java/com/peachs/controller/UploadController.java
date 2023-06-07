@@ -67,4 +67,6 @@ public class UploadController {
 		model.addAttribute("works", works);
 		return "board/mainpage";
 	}
+	
+	
 }

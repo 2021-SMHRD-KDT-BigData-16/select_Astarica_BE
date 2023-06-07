@@ -205,7 +205,7 @@
 	    	  $('.datacard').click(function() {
 	    	    var odPath = $(this).find('input[type=hidden]').val();
 	    	    console.log(odPath);
-	    	    
+	    	    var temp = {}
 	    	    
 			    $.ajax({
 			      url: 'http://127.0.0.1:5000/test', // Flask 엔드포인트의 URL을 입력하세요.
@@ -214,6 +214,12 @@
 			      success: function(response) {
 			        // Ajax 요청이 성공적으로 완료되었을 때 실행할 코드를 작성합니다.
 			        console.log('Success:', response);
+			        
+			        // 예시 1: Ajax 응답 데이터를 컨트롤러로 전달하기
+			        var jsonData = JSON.stringify(response);
+			        var url = 'http://localhost:8081/selectBE/test?data=' + encodeURIComponent(jsonData);
+			        window.location.href = "/test";
+
 			      },
 			      error: function(xhr, status, error) {
 			        // Ajax 요청이 실패했을 때 실행할 코드를 작성합니다.
