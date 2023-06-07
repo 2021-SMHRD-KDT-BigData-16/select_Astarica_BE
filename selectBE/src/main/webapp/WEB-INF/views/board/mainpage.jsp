@@ -219,7 +219,6 @@
 			        var jsonData = JSON.stringify(response);
 			        var url = 'http://localhost:8081/selectBE/test?data=' + encodeURIComponent(jsonData);
 			        window.location.href = url;
-;
 			      },
 			      error: function(xhr, status, error) {
 			        // Ajax 요청이 실패했을 때 실행할 코드를 작성합니다.

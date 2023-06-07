@@ -11,20 +11,19 @@
 <h1>
 	Hello world!  
 </h1>
-<c:forEach var="in" items="${list}">
-	<h2>${in.user_id}</h2>
-	<h2>${in.user_pw}</h2>
-	<h2>${in.user_name}</h2>
-	<h2>${in.user_com}</h2>
-	<h2>${in.user_job}</h2>
+ 
+<c:forEach var="in" items="${csv}">
+<h2>${in.imagePath}</h2> 	
+	<h2>${in.imageWidth}</h2>
+	<h2>${in.imageHeight}</h2>
+	<h2>${in.Shape_num}</h2>
+	<h2>${in.label}</h2>
+	<h2>${in.point1_x}</h2>
+	<h2>${in.point1_y}</h2>
+	<h2>${in.point2_x}</h2>
+	<h2>${in.point2_y}</h2>
+	<h2>${in.ratio}</h2>
+	
 </c:forEach>
-
-<script>
-const urlParams = new URLSearchParams(location.search);
-const jsonData = urlParams.get('data');
-
-const parsedData = JSON.parse(decodeURIComponent(jsonData));
-console.log(parsedData);
-</script>
 </body>
 </html>

@@ -1,19 +1,24 @@
 package com.peachs.controller;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.peachs.entity.AccountsInfo;
+import com.peachs.entity.Csv;
 import com.peachs.entity.OriginDataInfo;
 import com.peachs.mapper.AccountsInfoMapper;
 import com.peachs.mapper.OriginDataInfoMapper;
@@ -107,10 +112,32 @@ public class AccountsInfoController {
 		}
 		
 		@GetMapping("/test")
-		public String test(HttpServletRequest request) {
+		public String test(HttpServletRequest request,Model model)throws IOException, ParseException {
 			String temp = request.getParameter("data");
 			System.out.println(temp);
-			return "home";
+			JSONArray jsonArray = new JSONArray(temp);
+			JSONObject element;
+			ArrayList<Csv> contents = new ArrayList<Csv>();
+			Csv csv = null;
+			for(int i=0; i<jsonArray.length(); i++) {
+				element = (JSONObject) jsonArray.opt(i);
+				int path = element.getInt("imagePath");
+				String test = Integer.toString(path);
+				csv.setImagePath(test);
+				csv.setLabel((String)element.get("label"));
+				csv.setPoint1_x(element.getInt("point1_x"));
+				csv.setPoint1_y(element.getInt("point1_y"));
+				csv.setPoint2_x(element.getInt("point2_x"));
+				csv.setPoint2_y(element.getInt("point2_y"));
+				csv.setImageHeight(element.getInt("imageHeight"));
+				csv.setImageWidth(element.getInt("imageWidth"));
+				csv.setShape_num(element.getInt("Shape_num"));
+				csv.setRatio(element.getInt("ratio"));
+				contents.add(i, csv);
+			}
+			System.out.println(contents.size());
+			model.addAttribute("csv", contents);
+	        return "home";
 		}
 
 }
