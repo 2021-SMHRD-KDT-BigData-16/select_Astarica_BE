@@ -3,6 +3,7 @@
 <%@page import="com.peachs.entity.AccountsInfo"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.peachs.entity.Csv"%>
+<%@ page import="java.util.HashMap" %>
 <%@ taglib prefix ="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix ="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix ="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
@@ -24,6 +25,22 @@
     <script src="https://kit.fontawesome.com/7872e4b187.js" crossorigin="anonymous"></script>
 </head>
 <body>
+<!-- csv 객체에서 label을 정리하는 로직 -->
+<%
+ArrayList<Csv> contents = (ArrayList<Csv>) session.getAttribute("csv");
+
+HashMap<String, Integer> labelCountMap = new HashMap<>();
+
+for (Csv csv : contents) {
+    String label = csv.getLabel();
+    if (labelCountMap.containsKey(label)) {
+        int count = labelCountMap.get(label);
+        labelCountMap.put(label, count + 1);
+    } else {
+        labelCountMap.put(label, 1);
+    }
+}
+%>
 <div class="container">
         <div class="navigation">
             <ul>
@@ -194,62 +211,24 @@
 
     </div>
 </div>
-	<% ArrayList<Csv> contents = (ArrayList<Csv>) session.getAttribute("csv");%>
-	<% int can = 0; %>
-	<% for (int i=0; i<contents.size(); i++) {%>
-		<%if (contents.get(i).getLabel().equals("can")){%>
-			<% can = can + 1; %>
-			
-		<%} %>
-	<%} %>
-	<% int glass = 0; %>
-	<% for (int i=0; i<contents.size(); i++) {%>
-		<%if (contents.get(i).getLabel().equals("glass")){%>
-			<% glass = glass + 1; %>
-			
-		<%} %>
-	<%} %>
-	<% int pack = 0; %>
-	<% for (int i=0; i<contents.size(); i++) {%>
-		<%if (contents.get(i).getLabel().equals("pack")){%>
-			<% pack = pack + 1; %>
-			
-		<%} %>
-	<%} %>
-	<% int paper = 0; %>
-	<% for (int i=0; i<contents.size(); i++) {%>
-		<%if (contents.get(i).getLabel().equals("paper")){%>
-			<% paper = paper + 1; %>
-			
-		<%} %>
-	<%} %>
-	<% int pet = 0; %>
-	<% for (int i=0; i<contents.size(); i++) {%>
-		<%if (contents.get(i).getLabel().equals("pet")){%>
-			<% pet = pet + 1; %>
-			
-		<%} %>
-	<%} %>
-	<% int plastic = 0; %>
-	<% for (int i=0; i<contents.size(); i++) {%>
-		<%if (contents.get(i).getLabel().equals("plastic")){%>
-			<% plastic = plastic + 1; %>
-			
-		<%} %>
-	<%} %>
-	<% int vinyl = 0; %>
-	<% for (int i=0; i<contents.size(); i++) {%>
-		<%if (contents.get(i).getLabel().equals("vinyl")){%>
-			<% vinyl = vinyl + 1; %>
-			
-		<%} %>
-	<%} %>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
     <script src="https://kit.fontawesome.com/7872e4b187.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.3.0/dist/chart.umd.min.js"></script>
     <script src="../js/dashboard.js"></script>
     <script>
+    
+	    var labels = [
+	    	  <% for (String label : labelCountMap.keySet()) { %>
+	    	    '<%= label %>',
+	    	  <% } %>
+	    	];
+	    var data = [
+	    	  <% for (int count : labelCountMap.values()) { %>
+	    	    <%= count %>,
+	    	  <% } %>
+	    	];
+    
         // MenuToggle
         let toggle = document.querySelector('.toggle');
         let navigation = document.querySelector('.navigation');
@@ -288,10 +267,10 @@
                 new Chart(ctx, {
                     type: 'bar',
                     data: {
-                        labels: ['Total','can','glass','pack','paper','pet','plastic','vinly'],
+                        labels: labels,
                         datasets: [{
                         label: 'Class Counts',
-                        data: [<%=can+glass+pack+paper+pet+plastic+vinyl%>, <%=can%>, <%=glass%>, <%=pack%>, <%=paper%>, <%=pet%>, <%=plastic%>, <%=vinyl%>],
+                        data: data,
                         // 데이터셋 배경 색상
                         backgroundColor: [
                         'rgba(255, 99, 132, 1)',
