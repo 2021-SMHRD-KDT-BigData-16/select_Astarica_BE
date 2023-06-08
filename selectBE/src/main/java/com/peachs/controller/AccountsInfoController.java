@@ -112,17 +112,17 @@ public class AccountsInfoController {
 		}
 		
 		@GetMapping("/test")
-		public String test(HttpServletRequest request,Model model)throws IOException, ParseException {
+		public String test(HttpServletRequest request, HttpSession session)throws IOException, ParseException {
 			String temp = request.getParameter("data");
 			System.out.println(temp);
 			JSONArray jsonArray = new JSONArray(temp);
 			JSONObject element;
 			ArrayList<Csv> contents = new ArrayList<Csv>();
-			Csv csv = null;
 			for(int i=0; i<jsonArray.length(); i++) {
 				element = (JSONObject) jsonArray.opt(i);
 				int path = element.getInt("imagePath");
-				String test = Integer.toString(path);
+				String test = Integer.toString(path)+".jpg";
+				Csv csv = new Csv();
 				csv.setImagePath(test);
 				csv.setLabel((String)element.get("label"));
 				csv.setPoint1_x(element.getInt("point1_x"));
@@ -131,13 +131,23 @@ public class AccountsInfoController {
 				csv.setPoint2_y(element.getInt("point2_y"));
 				csv.setImageHeight(element.getInt("imageHeight"));
 				csv.setImageWidth(element.getInt("imageWidth"));
-				csv.setShape_num(element.getInt("Shape_num"));
+				csv.setShapeNum(element.getInt("Shape_num"));
 				csv.setRatio(element.getInt("ratio"));
-				contents.add(i, csv);
+				contents.add(csv);
 			}
 			System.out.println(contents.size());
-			model.addAttribute("csv", contents);
-	        return "home";
+			for (int j=0; j<contents.size(); j++) {
+				System.out.println(contents.get(j).getImagePath());
+				System.out.println(contents.get(j).getLabel());
+				System.out.println(contents.get(j).getPoint1_x());
+				System.out.println(contents.get(j).getPoint1_y());
+				System.out.println(contents.get(j).getPoint2_x());
+				System.out.println(contents.get(j).getPoint2_y());
+				System.out.println(contents.get(j).getShapeNum());
+			
+			}
+			session.setAttribute("csv", contents);
+	        return "board/dashboard";
 		}
 
 }

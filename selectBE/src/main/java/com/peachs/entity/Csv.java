@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 public class Csv {
 	private String imagePath;
 	private String label;
-	private int Shape_num;
+	private int shapeNum;
 	private int point1_x;
 	private int point1_y;
 	private int point2_x;
@@ -18,5 +18,4 @@ public class Csv {
 	private int imageHeight;
 	private int imageWidth;
 	private double ratio;
-	
 }

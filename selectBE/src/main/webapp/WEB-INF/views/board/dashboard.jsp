@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@page import="java.util.List"%>
 <%@page import="com.peachs.entity.AccountsInfo"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.peachs.entity.Csv"%>
 <%@ taglib prefix ="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix ="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix ="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
@@ -192,7 +194,14 @@
 
     </div>
 </div>
-
+	<% ArrayList<Csv> contents = (ArrayList<Csv>) session.getAttribute("csv");%>
+	<% int pack = 0; %>
+	<% for (int i=0; i<contents.size(); i++) {%>
+		<%if (contents.get(i).getLabel().equals("pack")){%>
+			<% pack = pack + 1; %>
+			
+		<%} %>
+	<%} %>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
     <script src="https://kit.fontawesome.com/7872e4b187.js" crossorigin="anonymous"></script>
@@ -219,6 +228,10 @@
         list.forEach((item) =>
         item.addEventListener('mouseover',activeLink));
         
+        <!-- 가져온 정보로 차트화 시키기 --!>
+        
+        
+        
         <!-- 원본/ 체크1/ 체크2 선택시 radio event -->
         const test = document.querySelector('.test');
         $("input[name='check']:radio").change(function () {
@@ -233,10 +246,10 @@
                 new Chart(ctx, {
                     type: 'bar',
                     data: {
-                        labels: ['Total', 'paper', 'pack', 'can', 'plastic', 'pet', 'glass', 'vinly'],
+                        labels: ['Total','can','glass','pack','paper','pet','plastic','vinly'],
                         datasets: [{
-                        label: 'earning',
-                        data: [1200, 1090, 3000, 5400, 1220, 3600, 4800, 4578],
+                        label: 'Class Counts',
+                        data: [1, 1, 1, <%=pack%>, 1, 1, 1, 1],
                         // 데이터셋 배경 색상
                         backgroundColor: [
                         'rgba(255, 99, 132, 1)',
@@ -274,7 +287,7 @@
                 new Chart(ctx, {
                     type: 'bar',
                     data: {
-                        labels: ['Total', 'paper', 'pack', 'can', 'plastic', 'pet', 'glass', 'vinly'],
+                    	labels: ['Total','can','glass','pack','paper','pet','plastic','vinly'],
                         datasets: [{
                         label: 'Reusable Trash',
                         data: [1000, 1090, 1500, 1000, 4578, 4700, 1300, 1500],
