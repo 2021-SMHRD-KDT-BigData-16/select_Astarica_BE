@@ -34,7 +34,7 @@ public class AccountsInfoController {
 	
 	@RequestMapping("/") // /list ---HandlerMapping---> 요청이 list() 메소드가 실행
 	public String first() {
-		return "board/login"; // flist.jsp --> 반환 값은 flist로 해야한다.
+		return "board/login_register"; // flist.jsp --> 반환 값은 flist로 해야한다.
 		// WEB-INF/views/list.jsp
 	}
 	//------------------------------------------------------FISRT PAGE---------------------------------------------------------//
@@ -65,11 +65,11 @@ public class AccountsInfoController {
 			return "redirect:/login";
 		}
 	//------------------------------------------------------REGISTER USER---------------------------------------------------------//
-		@GetMapping("/register") 
-		public String register() {
-			
-			return "board/register";
-		}
+//		@GetMapping("/register") 
+//		public String register() {
+//			
+//			return "board/register";
+//		}
 		
 		@PostMapping("/register") 
 		public String register(AccountsInfo mvo) {		
