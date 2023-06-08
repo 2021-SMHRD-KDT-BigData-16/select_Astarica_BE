@@ -195,10 +195,52 @@
     </div>
 </div>
 	<% ArrayList<Csv> contents = (ArrayList<Csv>) session.getAttribute("csv");%>
+	<% int can = 0; %>
+	<% for (int i=0; i<contents.size(); i++) {%>
+		<%if (contents.get(i).getLabel().equals("can")){%>
+			<% can = can + 1; %>
+			
+		<%} %>
+	<%} %>
+	<% int glass = 0; %>
+	<% for (int i=0; i<contents.size(); i++) {%>
+		<%if (contents.get(i).getLabel().equals("glass")){%>
+			<% glass = glass + 1; %>
+			
+		<%} %>
+	<%} %>
 	<% int pack = 0; %>
 	<% for (int i=0; i<contents.size(); i++) {%>
 		<%if (contents.get(i).getLabel().equals("pack")){%>
 			<% pack = pack + 1; %>
+			
+		<%} %>
+	<%} %>
+	<% int paper = 0; %>
+	<% for (int i=0; i<contents.size(); i++) {%>
+		<%if (contents.get(i).getLabel().equals("paper")){%>
+			<% paper = paper + 1; %>
+			
+		<%} %>
+	<%} %>
+	<% int pet = 0; %>
+	<% for (int i=0; i<contents.size(); i++) {%>
+		<%if (contents.get(i).getLabel().equals("pet")){%>
+			<% pet = pet + 1; %>
+			
+		<%} %>
+	<%} %>
+	<% int plastic = 0; %>
+	<% for (int i=0; i<contents.size(); i++) {%>
+		<%if (contents.get(i).getLabel().equals("plastic")){%>
+			<% plastic = plastic + 1; %>
+			
+		<%} %>
+	<%} %>
+	<% int vinyl = 0; %>
+	<% for (int i=0; i<contents.size(); i++) {%>
+		<%if (contents.get(i).getLabel().equals("vinyl")){%>
+			<% vinyl = vinyl + 1; %>
 			
 		<%} %>
 	<%} %>
@@ -249,7 +291,7 @@
                         labels: ['Total','can','glass','pack','paper','pet','plastic','vinly'],
                         datasets: [{
                         label: 'Class Counts',
-                        data: [1, 1, 1, <%=pack%>, 1, 1, 1, 1],
+                        data: [<%=can+glass+pack+paper+pet+plastic+vinyl%>, <%=can%>, <%=glass%>, <%=pack%>, <%=paper%>, <%=pet%>, <%=plastic%>, <%=vinyl%>],
                         // 데이터셋 배경 색상
                         backgroundColor: [
                         'rgba(255, 99, 132, 1)',
