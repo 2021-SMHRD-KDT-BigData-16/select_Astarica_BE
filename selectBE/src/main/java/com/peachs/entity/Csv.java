@@ -17,5 +17,5 @@ public class Csv {
 	private int point2_y;
 	private int imageHeight;
 	private int imageWidth;
-	private double ratio;
+	private String ratio;
 }

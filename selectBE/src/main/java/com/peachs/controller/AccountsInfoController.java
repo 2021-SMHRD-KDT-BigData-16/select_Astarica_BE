@@ -132,7 +132,9 @@ public class AccountsInfoController {
 				csv.setImageHeight(element.getInt("imageHeight"));
 				csv.setImageWidth(element.getInt("imageWidth"));
 				csv.setShapeNum(element.getInt("Shape_num"));
-				csv.setRatio(element.getInt("ratio"));
+				double ratio = element.getDouble("ratio");
+				String ratio_temp = Double.toString(ratio);
+				csv.setRatio(ratio_temp);
 				contents.add(csv);
 			}
 			System.out.println(contents.size());
