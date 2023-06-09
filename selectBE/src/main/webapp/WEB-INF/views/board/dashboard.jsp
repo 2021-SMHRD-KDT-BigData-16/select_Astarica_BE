@@ -223,12 +223,27 @@ for (Csv csv : contents) {
 	    	    '<%= label %>',
 	    	  <% } %>
 	    	];
+
 	    var data = [
 	    	  <% for (int count : labelCountMap.values()) { %>
 	    	    <%= count %>,
 	    	  <% } %>
 	    	];
-    
+    	
+    	var ratios = [
+	    	  <% for (String ratio : ratioCountMap.keySet()) { %>
+	    	    '<%= ratio %>',
+	    	  <% } %>
+	    	];
+	    ratios.sort();
+	    
+	    var ratio_data = [
+	    	  <% for (int cnt : ratioCountMap.values()) { %>
+	    	    <%= cnt %>,
+	    	  <% } %>
+	    	];
+		ratio_data.sort();
+  		
         // MenuToggle
         let toggle = document.querySelector('.toggle');
         let navigation = document.querySelector('.navigation');

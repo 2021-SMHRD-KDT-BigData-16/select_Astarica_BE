@@ -86,13 +86,16 @@ public class AccountsInfoController {
 		}
 	
 		@GetMapping("/mainpage") 
-		public String mainpage() {
-			
+		public String mainpage(HttpSession session, Model model) {
+			AccountsInfo user = (AccountsInfo)session.getAttribute("mvo");
+			List<OriginDataInfo> works = o_mapper.getLists(user);
+			model.addAttribute("works", works);
 			return "board/mainpage";
 		}
 		@GetMapping("/dashboard") 
-		public String dashboard() {
-			
+		public String dashboard(HttpSession session, Model model) {
+			ArrayList<Csv> csv =  (ArrayList<Csv>)session.getAttribute("csv");
+			model.addAttribute("csv", csv);
 			return "board/dashboard";
 		}
 		@GetMapping("/analysis") 

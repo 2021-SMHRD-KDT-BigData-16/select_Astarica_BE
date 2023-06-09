@@ -8,11 +8,33 @@
 <c:set var="cpath" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
 <html lang="en">
-    <style>
+    <style type="text/css">
         #my-input {
             visibility: hidden;
         }
+        
+     :root {
+        --white: #fff;
+        --blue: #287bff;
+        --dur: 8s;
+        
+    }
+    #loading {
+        background: var(--white);
+        color: var(--blue);
+        font: bold 1em/1.5 "Comfortaa", sans-serif;
+        display: grid;
+        place-items: center;
+        align-content: center;
+        height: 100vh;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        margin-left : 800px ;
+    }
     </style>
+    
+    
+    
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -22,6 +44,9 @@
     <script src="https://kit.fontawesome.com/7872e4b187.js" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 </head>
+
+
+
 <body>
 <!-- 메뉴 -->
 <div class="container">
@@ -207,20 +232,49 @@
     </div>        
 </div>
 
+
+    <div id = "loading" >
+    <div class="container">        
+        <i class="fas fa-spinner fa-10x fa-spin"></i>       
+      </div>
+    </div>
+      
+      
+
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
  
     <script>
-	    $(document).ready(function() {
+    
+    /* var loading = "";
+    $(function() {
+    	loading = $('<div id="loading" class="loading"></div><img id="loading_img" alt="loading" src="${cpath}/resources/images/img.gif" />').appendTo(document.body).hide();
+	    
+   
+    	loading.hide(); */ 
+    	$(document).ready(function(){
+    		
+    		   $('#loading').hide(); //첫 시작시 로딩바를 숨겨준다.
+    		})
+    	
+    	
+    	$(document).ready(function() {
 	    	  $('.datacard').click(function() {
 	    	    var odPath = $(this).find('input[type=hidden]').val();
 	    	    console.log(odPath);
 	    	    var temp = {}
-	    	    
 			    $.ajax({
 			      url: 'http://127.0.0.1:5000/test', // Flask 엔드포인트의 URL을 입력하세요.
 			      type: 'POST',
 			      data: {od_path: odPath},
+			      beforeSend: function() {
+			    	     //통신을 시작할때 처리
+			    	     $('#loading').show();
+			    	},
+			   		complete: function() {
+			    	        //통신이 완료된 후 처리
+			    	     $('#loading').hide();
+			    	},
 			      success: function(response) {
 			        // Ajax 요청이 성공적으로 완료되었을 때 실행할 코드를 작성합니다.
 			        console.log('Success:', response);
@@ -229,10 +283,12 @@
 			        var jsonData = JSON.stringify(response);
 			        var url = 'http://localhost:8081/selectBE/test?data=' + encodeURIComponent(jsonData);
 			        window.location.href = url;
+			        
 			      },
 			      error: function(xhr, status, error) {
 			        // Ajax 요청이 실패했을 때 실행할 코드를 작성합니다.
 			        console.error('Error:', error);
+			        $('#loading').hide();
 			      }
 			    });
 	    	    
@@ -240,7 +296,7 @@
 			    
 	    	  });
 	    	});
-	    
+    /* }); */
         
         let toggle = document.querySelector('.toggle');
         let navigation = document.querySelector('.navigation');
