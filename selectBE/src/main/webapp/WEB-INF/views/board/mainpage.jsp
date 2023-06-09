@@ -65,13 +65,13 @@
                     </a>
                 </li>
                 <li>
-                    <a href="${cpath}/dashboard">	
+                    <a class = "alert" href = "#">	
                         <span class="icon"><ion-icon name="bar-chart-outline"></ion-icon></span>
                         <span class="title">Dashboard</span>
                     </a>
                 </li>
                 <li>
-                    <a href="${cpath}/analysis">
+                    <a class = "alert" href = "#">
                         <span class="icon"><ion-icon name="documents-outline"></ion-icon></span>
                         <span class="title">ANALYSIS</span>
                     </a>
@@ -251,12 +251,17 @@
  
     <script>
     
-    /* var loading = "";
-    $(function() {
-    	loading = $('<div id="loading" class="loading"></div><img id="loading_img" alt="loading" src="${cpath}/resources/images/img.gif" />').appendTo(document.body).hide();
-	    
-   
-    	loading.hide(); */ 
+    $(".alert").click(function (){
+        Swal.fire(
+      		  '데이터를 먼저 선택해주세요!',
+      		  'You clicked the button!',
+      		  'success'
+      		)
+    	
+    });
+    
+    
+    
     	$(document).ready(function(){
     		
     		   $('#loading').hide(); //첫 시작시 로딩바를 숨겨준다.
