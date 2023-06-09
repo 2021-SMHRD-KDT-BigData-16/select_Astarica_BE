@@ -470,6 +470,28 @@ a{
     }
 }
 
+
 #ctx{
-    width : 770px !important;   
+	margin-left : 30px;
+}
+#ctx1{
+	margin-left : 70px;
+}
+
+
+canvas .check1{
+	width : 40% !important;  
+	margin-left : 70px !important;
+}
+
+
+canvas .check2{
+	width : 25% !important;  
+	margin-left : 70px !important;
+}
+
+
+canvas .check3{
+	width : 40% !important;  
+	margin-left : 70px !important;
 }

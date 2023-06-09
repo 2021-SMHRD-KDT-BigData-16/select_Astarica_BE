@@ -197,12 +197,12 @@ for (Csv csv : contents) {
                     <div class="check">
                         <input type="radio" value="check1" name="check" />
                     </div>
-                    <div class="optionKey1">원본</div>
+                    <div class="optionKey1">원본 데이터</div>
                     <div class="optionKey1_value">
-                        <div class="optionValue1"><ion-icon name="server-outline"></ion-icon> Value: 0</div>
+                        <div class="optionValue1"><ion-icon name="server-outline"></ion-icon> 라벨 개수</div>
                     </div>
                     <div class="optionKey1_data">
-                        <div class="optionValue1"><ion-icon name="server-outline"></ion-icon> Data: 0</div>
+                        <div class="optionValue1"><ion-icon name="server-outline"></ion-icon> 종횡비 </div>
                     </div>
                 </div>
 
@@ -219,30 +219,16 @@ for (Csv csv : contents) {
                     </div>
                 </div>
 
-                <div class="option3">
-                    <div class="check">
-                        <input type="radio" value="check3" name="check" />
-                    </div>
-                    <div class="optionKey3">체크2</div>
-                    <div class="optionKey3_value">
-
-                        <div class="optionValue3"><ion-icon name="server-outline"></ion-icon> Value: 0</div>
-                    </div>
-                    <div class="optionKey3_data">
-
-                        <div class="optionValue3"><ion-icon name="server-outline"></ion-icon> Data: 0</div>
-                    </div>
-                </div>
 
             </div>
             <!-- Add Charts -->
             <div class="graphBox">
-                <div id="box" class="bar" style="position: relative; height:40vh; width:86vw">
-                    <div class="chart-wrap">
-                        <canvas id="ctx" width="60" height="60"></canvas>
-                    </div>
+                <div id="box" class="bar" style="position: relative; height:40vh; width:86vw; display : flex;">
                 </div>
             </div>
+            
+            
+            
         </div>
 
     </div>
@@ -300,6 +286,63 @@ for (Csv csv : contents) {
         list.forEach((item) =>
         item.addEventListener('mouseover',activeLink));
         
+        
+        
+        function transparentize(value, opacity) {
+      	  var alpha = opacity === undefined ? 0.5 : 1 - opacity;
+
+      	  // value의 투명도 조절
+      	  if (value.startsWith('#')) {
+      	    // HEX 색상 값인 경우
+      	    var hexValue = value.substring(1); // '#' 제거
+      	    var rgbValue = hexToRgb(hexValue);
+      	    return rgbaToColorString(rgbValue.r, rgbValue.g, rgbValue.b, alpha);
+      	  } else if (value.startsWith('rgb') || value.startsWith('hsl')) {
+      	    // RGB 또는 HSL 색상 값인 경우
+      	    var colorValue = parseColor(value);
+      	    return rgbaToColorString(colorValue.r, colorValue.g, colorValue.b, alpha);
+      	  } else {
+      	    // 그 외의 경우
+      	    return value;
+      	  }
+      	}
+      
+      // HEX 색상 값을 RGB 객체로 변환
+      function hexToRgb(hexValue) {
+        var hex = hexValue.length === 3 ? hexValue + hexValue : hexValue;
+        var r = parseInt(hex.substring(0, 2), 16);
+        var g = parseInt(hex.substring(2, 4), 16);
+        var b = parseInt(hex.substring(4, 6), 16);
+        return { r: r, g: g, b: b };
+      }
+
+      // RGB 또는 HSL 색상 값을 객체로 파싱
+      function parseColor(colorValue) {
+        var tempDiv = document.createElement('div');
+        tempDiv.style.color = colorValue;
+        document.body.appendChild(tempDiv);
+        var computedColor = getComputedStyle(tempDiv).color;
+        document.body.removeChild(tempDiv);
+
+        var match = computedColor.match(/\d+/g);
+        return {
+          r: parseInt(match[0]),
+          g: parseInt(match[1]),
+          b: parseInt(match[2])
+        };
+      }
+
+      // RGBA 값을 색상 문자열로 변환
+      function rgbaToColorString(r, g, b, a) {
+        return 'rgba(' + r + ', ' + g + ', ' + b + ', ' + a + ')';
+      }
+        
+        
+        
+        
+        
+        
+        
         <!-- 가져온 정보로 차트화 시키기 --!>
         
         
@@ -309,12 +352,16 @@ for (Csv csv : contents) {
         $("input[name='check']:radio").change(function () {
             $('#box').children().remove(); // this is my <canvas> element
             $('#box').append('<canvas id="ctx" class="chart"><canvas>');
+            $('#box').append('<canvas id="ctx1" class="chart"><canvas>');
+            
             var value = this.value;
             $("#ctx").removeClass()
             $("#ctx").addClass(value)
             console.log(document.getElementById('ctx').getAttribute("class"))
             const className = document.getElementById('ctx').getAttribute("class")
+            
             if (className == 'check1') {
+            	
                 new Chart(ctx, {
                     type: 'bar',
                     data: {
@@ -324,14 +371,15 @@ for (Csv csv : contents) {
                         data: data,
                         // 데이터셋 배경 색상
                         backgroundColor: [
-                        'rgba(255, 99, 132, 1)',
-                        'rgba(54, 162, 235, 1)',
-                        'rgba(255, 206, 86, 1)',
-                        'rgba(75, 192, 192, 1)',
-                        'rgba(153, 102, 255, 1)',
-                        'rgba(255, 159, 64, 1)',
-                        'rgba(255, 99, 132, 1)',
-                        'rgba(54, 162, 235, 1)'
+                            transparentize('rgb(255, 99, 132)', 0.5),
+                            transparentize('rgb(255, 159, 64)', 0.5),
+                            transparentize('rgb(255, 205, 86)', 0.5),
+                            transparentize('rgb(75, 192, 192)', 0.5),
+                            transparentize('rgb(54, 162, 235)', 0.5),
+                            
+                            transparentize('rgb(153, 102, 255)', 0.5),
+                            transparentize('rgb(201, 203, 207)', 0.5),
+                            transparentize('rgb(66, 129, 255)', 0.5)
                             ],
                             // 테두리 색상 설정
                             borderColor: [
@@ -351,35 +399,40 @@ for (Csv csv : contents) {
                           // 반응형 차트
                           reponsive: true,
                         }
-                    }
+                    },
+                    plugins: {
+                        legend: {
+                          position: 'top',
+                        },
+                        title: {
+                          display: true,
+                          text: '제목1'
+                        }
+                      }
                 }
             });
-    
-            } else if (className == 'check2') {
-                new Chart(ctx, {
-                    type: 'bar',
+            
+                new Chart(ctx1, {
+                	type: 'doughnut',
                     data: {
-                    	labels: ['Total','can','glass','pack','paper','pet','plastic','vinly'],
+                    	labels: labels,
                         datasets: [{
-                        label: 'Reusable Trash',
-                        data: [1000, 1090, 1500, 1000, 4578, 4700, 1300, 1500],
+                        label: 'Ratio',
+                        data: data,
                         // 데이터셋 배경 색상
                         backgroundColor: [
-                        'rgba(255, 99, 132, 1)',
-                        'rgba(54, 162, 235, 1)',
-                        'rgba(255, 206, 86, 1)',
-                        'rgba(75, 192, 192, 1)',
-                        'rgba(153, 102, 255, 1)',
-                        'rgba(255, 159, 64, 1)',
-                        'rgba(255, 99, 132, 1)',
-                        'rgba(54, 162, 235, 1)'
+                            transparentize('rgb(255, 99, 132)', 0.5),
+                            transparentize('rgb(255, 159, 64)', 0.5),
+                            transparentize('rgb(255, 205, 86)', 0.5),
+                            transparentize('rgb(75, 192, 192)', 0.5),
+                            transparentize('rgb(54, 162, 235)', 0.5),
+                            
+                            transparentize('rgb(153, 102, 255)', 0.5),
+                            transparentize('rgb(201, 203, 207)', 0.5),
+                            transparentize('rgb(66, 129, 255)', 0.5)
+                            
                             ],
                             // 테두리 색상 설정
-                            borderColor: [
-                                'rgba(255, 99, 132, 1)',
-                                'rgba(54, 162, 235, 1)',
-                                'rgba(255, 206, 86, 1)'
-                            ],
                         }]
                     },
                     // 차트의 옵션 설정
@@ -390,12 +443,30 @@ for (Csv csv : contents) {
                           // y축이 0에서 시작하도록 지정
                           beginAtZero: true,
                           // 반응형 차트
-                          reponsive: true,
+	                      reponsive: false,
                         }
-                    }
+                    	
+                    },
+                    plugins: {
+                        legend: {
+                          position: 'top',
+                          labels : {
+                        	  fontSize : 16
+                          }
+                        },
+                        title: {
+                          display: true,
+                          text: '제목2',
+                          fontSize: 50
+                        }
+                      }
                 }
+
             });
-            } else if (className == 'check3') {
+            
+          	
+                
+            } else if (className == 'check2') {
                 new Chart(ctx, {
                     type: 'bar',
                     data: {
@@ -427,6 +498,16 @@ for (Csv csv : contents) {
                     options: {
                         // 차트가 반응형으로 동작하도록 하기
                         maintainAspectRatio :false,
+                        
+                        plugins: {
+                            legend: {
+                              position: 'top',
+                            },
+                            title: {
+                              display: true,
+                              text: '제목'
+                            }
+                          }
                     }
                 });
             }
