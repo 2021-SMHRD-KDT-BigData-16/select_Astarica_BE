@@ -30,7 +30,6 @@
 ArrayList<Csv> contents = (ArrayList<Csv>) session.getAttribute("csv");
 
 HashMap<String, Integer> labelCountMap = new HashMap<>();
-HashMap<String, Integer> ratioCountMap = new HashMap<>();
 
 for (Csv csv : contents) {
     String label = csv.getLabel();
@@ -40,18 +39,6 @@ for (Csv csv : contents) {
     } else {
         labelCountMap.put(label, 1);
     }
-}
-%>
-<% 
-for (Csv csv: contents){
-    String ratio = csv.getRatio();
-    if (ratioCountMap.containsKey(ratio)) {
-        int count = ratioCountMap.get(ratio);
-        ratioCountMap.put(ratio, count + 1);
-    } else {
-        ratioCountMap.put(ratio, 1);
-    }
-
 }
 %>
 <div class="container">
@@ -116,8 +103,8 @@ for (Csv csv: contents){
                     <ion-icon name="server-outline"></ion-icon>
                 </div> 
                 <div>
-                    <div class="cardName">Amount of data</div>
-                    <div class="numbers"><%=contents.size()%></div>
+                    <div class="cardName">Data</div>
+                    <div class="numbers">10,000</div>
                 </div>
             </div>
             <div class="card">
@@ -125,8 +112,8 @@ for (Csv csv: contents){
                     <ion-icon name="folder-outline"></ion-icon>
                 </div> 
                 <div>
-                    <div class="cardName">Class</div>
-                    <div class="numbers"><%=labelCountMap.size()%></div>
+                    <div class="cardName">Slice</div>
+                    <div class="numbers">1</div>
                 </div>
             </div>
             <div class="card">
@@ -176,10 +163,10 @@ for (Csv csv: contents){
                     </div>
                     <div class="optionKey1">원본</div>
                     <div class="optionKey1_value">
-                        <div class="optionValue1"><ion-icon name="server-outline"></ion-icon>Value: <%=contents.size()%></div>
+                        <div class="optionValue1"><ion-icon name="server-outline"></ion-icon> Value: 0</div>
                     </div>
                     <div class="optionKey1_data">
-                        <div class="optionValue1"><ion-icon name="server-outline"></ion-icon>Data: <%=contents.size()%></div>
+                        <div class="optionValue1"><ion-icon name="server-outline"></ion-icon> Data: 0</div>
                     </div>
                 </div>
 
@@ -230,34 +217,18 @@ for (Csv csv: contents){
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.3.0/dist/chart.umd.min.js"></script>
     <script src="../js/dashboard.js"></script>
     <script>
-    	
+    
 	    var labels = [
 	    	  <% for (String label : labelCountMap.keySet()) { %>
 	    	    '<%= label %>',
 	    	  <% } %>
 	    	];
-	    labels.unshift("Total");
 	    var data = [
 	    	  <% for (int count : labelCountMap.values()) { %>
 	    	    <%= count %>,
 	    	  <% } %>
 	    	];
-    	data.unshift(<%= contents.size()%>);
-    	
-    	var ratios = [
-	    	  <% for (String ratio : ratioCountMap.keySet()) { %>
-	    	    '<%= ratio %>',
-	    	  <% } %>
-	    	];
-	    ratios.sort();
-	    
-	    var ratio_data = [
-	    	  <% for (int cnt : ratioCountMap.values()) { %>
-	    	    <%= cnt %>,
-	    	  <% } %>
-	    	];
-		ratio_data.sort();
-  		
+    
         // MenuToggle
         let toggle = document.querySelector('.toggle');
         let navigation = document.querySelector('.navigation');
@@ -335,12 +306,12 @@ for (Csv csv: contents){
     
             } else if (className == 'check2') {
                 new Chart(ctx, {
-                    type: 'bubble',
+                    type: 'bar',
                     data: {
-                    	labels: ratios,
+                    	labels: ['Total','can','glass','pack','paper','pet','plastic','vinly'],
                         datasets: [{
-                        label: 'Ratio ',
-                        data: ratio_data,
+                        label: 'Reusable Trash',
+                        data: [1000, 1090, 1500, 1000, 4578, 4700, 1300, 1500],
                         // 데이터셋 배경 색상
                         backgroundColor: [
                         'rgba(255, 99, 132, 1)',
@@ -362,15 +333,14 @@ for (Csv csv: contents){
                     },
                     // 차트의 옵션 설정
                     options: {
-                      reponsive: true,
                       scales: {
                         // y축 옵션
                         y: {
                           // y축이 0에서 시작하도록 지정
                           beginAtZero: true,
                           // 반응형 차트
-                        },
-                    	
+                          reponsive: true,
+                        }
                     }
                 }
             });
