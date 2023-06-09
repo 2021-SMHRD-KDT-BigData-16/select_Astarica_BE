@@ -114,10 +114,13 @@ public class AccountsInfoController {
 			return "board/dashboard_label";
 		}
 		
-		@GetMapping("/test")
+		@PostMapping("/test")
 		public String test(HttpServletRequest request, HttpSession session)throws IOException, ParseException {
-			String temp = request.getParameter("data");
+			
+			String temp = request.getParameter("json");
+			String filename = request.getParameter("file");
 			System.out.println(temp);
+			System.out.println(filename);
 			JSONArray jsonArray = new JSONArray(temp);
 			JSONObject element;
 			ArrayList<Csv> contents = new ArrayList<Csv>();
@@ -156,9 +159,9 @@ public class AccountsInfoController {
 				System.out.println(contents.get(j).getPoint2_x());
 				System.out.println(contents.get(j).getPoint2_y());
 				System.out.println(contents.get(j).getShapeNum());
-			
 			}
 			session.setAttribute("csv", contents);
+			session.setAttribute("file_name", filename);
 	        return "board/dashboard";
 		}
 

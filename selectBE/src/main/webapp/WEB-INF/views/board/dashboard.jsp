@@ -122,7 +122,7 @@ for (Csv csv : contents) {
               <!-- Header -->
               <div class="temHeader">
                 <div class="dataName">
-                     <p>Dataset Name</p>
+                     <p>${file_name}</p>
                 </div>
             </div>
 

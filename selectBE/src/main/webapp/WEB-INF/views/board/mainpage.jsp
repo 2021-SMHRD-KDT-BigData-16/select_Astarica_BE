@@ -166,15 +166,17 @@
                 <div class="dataBox">
                 <c:if test="${!empty works}">
                 	<c:forEach var="work" items="${works}">
-                	<div class="datacard">
-                        <div class="iconBx">
-                            <ion-icon name="server-outline"></ion-icon>
-                        </div> 
-                        <div>
-                            <div class="dataName">${work.od_name}</div>
-                            <div class="date">${work.od_date}</div>
-                    		<input type="hidden" value="${work.od_path}">
-                        </div>
+                		<div class="datacard">
+	                        <div class="iconBx">
+                            	<ion-icon name="server-outline"></ion-icon>
+                        	</div>
+
+                        	<div class="formtest">
+                            	<div class="dataName">${work.od_name}</div>
+                            	<div class="date">${work.od_date}</div>
+                            	<input type="hidden" name='file' value="${work.od_name}">
+                    			<input type="hidden" name='path' value="${work.od_path}">
+                        	</div>
                     </div>
                 	</c:forEach>
                 </c:if>
@@ -239,7 +241,10 @@
       </div>
     </div>
       
-      
+    <form id ="file_form">
+    	<input type="hidden" value="" name="json" id="json_input">
+    	<input type="hidden" value="" name="file" id="file_input">
+    </form>
 
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
@@ -255,13 +260,22 @@
     	$(document).ready(function(){
     		
     		   $('#loading').hide(); //첫 시작시 로딩바를 숨겨준다.
+    		   
     		})
     	
     	
     	$(document).ready(function() {
+    		function form_submit(){
+    			var formData = $("#file_form");
+	    		formData.attr("action","${cpath}/test");
+	    		formData.attr("method","post");
+	    		formData.submit();
+    		}
 	    	  $('.datacard').click(function() {
-	    	    var odPath = $(this).find('input[type=hidden]').val();
-	    	    console.log(odPath);
+	    	    var odPath = $(this).find('input[name=path]').val();
+	    	    var file_name = $(this).find('input[name=file]').val();
+				console.log(odPath);
+				console.log(file_name);
 			    $.ajax({
 			      url: 'http://127.0.0.1:5000/test', // Flask 엔드포인트의 URL을 입력하세요.
 			      type: 'POST',
@@ -279,9 +293,12 @@
 			        console.log('Success:', response);
 			        // 예시 1: Ajax 응답 데이터를 컨트롤러로 전달하기
 			        var jsonData = JSON.stringify(response);
-			        var url = 'http://localhost:8081/selectBE/test?data=' + encodeURIComponent(jsonData);
-			        window.location.href = url;
-			        
+			        console.log(jsonData);
+			        $("#file_input").val(file_name);
+			        $("#json_input").val(jsonData);
+//			        var url = "http://localhost:8081/selectBE/test?data=' + encodeURIComponent(jsonData)";
+			        form_submit();
+		    		
 			      },
 			      error: function(xhr, status, error) {
 			        // Ajax 요청이 실패했을 때 실행할 코드를 작성합니다.
@@ -295,7 +312,7 @@
 	    	  });
 	    	});
     /* }); */
-        
+   
         let toggle = document.querySelector('.toggle');
         let navigation = document.querySelector('.navigation');
         let main = document.querySelector('.main');
