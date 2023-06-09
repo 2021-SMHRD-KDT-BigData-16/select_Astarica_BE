@@ -3,7 +3,7 @@
 <mapper namespace="com.peachs.mapper.OriginDataInfoMapper">
 		<!-- 전체 게시물을 가져오는 SQL -->
 	<select id = "getLists" resultType="com.peachs.entity.OriginDataInfo" parameterType="com.peachs.entity.OriginDataInfo">
-		select * from origin_data_info where user_id =#{user_id}
+		select * from origin_data_info where user_id =#{user_id} order by od_date desc
 	</select>
 	
 	<insert id = "insert" parameterType="com.peachs.entity.OriginDataInfo">
