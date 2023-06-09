@@ -1,9 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@page import="java.util.List"%>
 <%@page import="com.peachs.entity.AccountsInfo"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.peachs.entity.Csv"%>
-<%@ page import="java.util.HashMap" %>
+<%@page import="java.util.HashMap" %>
 <%@ taglib prefix ="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix ="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix ="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
@@ -30,6 +30,9 @@
 ArrayList<Csv> contents = (ArrayList<Csv>) session.getAttribute("csv");
 
 HashMap<String, Integer> labelCountMap = new HashMap<>();
+HashMap<String, Integer> ratioCountMap = new HashMap<>();
+HashMap<String, Integer> wideCountMap = new HashMap<>();
+HashMap<String, Integer> bwideCountMap = new HashMap<>();
 
 for (Csv csv : contents) {
     String label = csv.getLabel();
@@ -38,6 +41,39 @@ for (Csv csv : contents) {
         labelCountMap.put(label, count + 1);
     } else {
         labelCountMap.put(label, 1);
+    }
+}
+%>
+<%
+for (Csv csv : contents) {
+    String ratio = csv.getRatio();
+    if (ratioCountMap.containsKey(ratio)) {
+        int count = ratioCountMap.get(ratio);
+        ratioCountMap.put(ratio, count + 1);
+    } else {
+        ratioCountMap.put(ratio, 1);
+    }
+}
+%>
+<%
+for (Csv csv : contents) {
+    String wide = csv.getWide();
+    if (wideCountMap.containsKey(wide)) {
+        int count = wideCountMap.get(wide);
+        wideCountMap.put(wide, count + 1);
+    } else {
+        wideCountMap.put(wide, 1);
+    }
+}
+%>
+<%
+for (Csv csv : contents) {
+    String bwide = csv.getBwide();
+    if (bwideCountMap.containsKey(bwide)) {
+        int count = bwideCountMap.get(bwide);
+        bwideCountMap.put(bwide, count + 1);
+    } else {
+        bwideCountMap.put(bwide, 1);
     }
 }
 %>

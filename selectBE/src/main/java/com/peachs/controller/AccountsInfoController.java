@@ -140,12 +140,13 @@ public class AccountsInfoController {
 				csv.setRatio(ratio_temp);
 				double wide = element.getDouble("wide");
 				String wide_temp = Double.toString(wide);
-				csv.setWide(wide);
+				csv.setWide(wide_temp);
 				double bwide = element.getDouble("bwide");
 				String bwide_temp = Double.toString(bwide);
-				csv.setBwide(bwide);
+				csv.setBwide(bwide_temp);
 				contents.add(csv);
 			}
+			
 			System.out.println(contents.size());
 			for (int j=0; j<contents.size(); j++) {
 				System.out.println(contents.get(j).getImagePath());
