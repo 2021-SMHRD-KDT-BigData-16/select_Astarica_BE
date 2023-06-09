@@ -236,13 +236,13 @@ for (Csv csv: contents){
 	    	    '<%= label %>',
 	    	  <% } %>
 	    	];
-	    labels.unshift("Total");
+	    
 	    var data = [
 	    	  <% for (int count : labelCountMap.values()) { %>
 	    	    <%= count %>,
 	    	  <% } %>
 	    	];
-    	data.unshift(<%= contents.size()%>);
+    	
     	
     	var ratios = [
 	    	  <% for (String ratio : ratioCountMap.keySet()) { %>
