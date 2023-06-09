@@ -138,6 +138,12 @@ public class AccountsInfoController {
 				double ratio = element.getDouble("ratio");
 				String ratio_temp = Double.toString(ratio);
 				csv.setRatio(ratio_temp);
+				double wide = element.getDouble("wide");
+				String wide_temp = Double.toString(wide);
+				csv.setWide(wide);
+				double bwide = element.getDouble("bwide");
+				String bwide_temp = Double.toString(bwide);
+				csv.setBwide(bwide);
 				contents.add(csv);
 			}
 			System.out.println(contents.size());

@@ -18,4 +18,6 @@ public class Dt {
 	private int imageHeight;
 	private int imageWidth;
 	private int ratio;
+	private int wide;
+	private int bwide;
 }

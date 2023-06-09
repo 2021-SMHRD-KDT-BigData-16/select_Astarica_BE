@@ -18,4 +18,6 @@ public class Csv {
 	private int imageHeight;
 	private int imageWidth;
 	private String ratio;
+	private String wide;
+	private String bwide;
 }
