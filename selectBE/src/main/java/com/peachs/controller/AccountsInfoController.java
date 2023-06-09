@@ -55,14 +55,14 @@ public class AccountsInfoController {
 			model.addAttribute("works", works);
 			return "board/mainpage";
 		}
-		return "redirect:/login";
+		return "board/login_register";
 	}
 	//------------------------------------------------------LOGOUT USER---------------------------------------------------------//
 		@RequestMapping("/logout")
 		public String loginout(HttpSession session) {
 			
 			session.invalidate();
-			return "redirect:/login";
+			return "board/login_register";
 		}
 	//------------------------------------------------------REGISTER USER---------------------------------------------------------//
 //		@GetMapping("/register") 
@@ -119,6 +119,7 @@ public class AccountsInfoController {
 			
 			String temp = request.getParameter("json");
 			String filename = request.getParameter("file");
+			filename = filename.toUpperCase();
 			System.out.println(temp);
 			System.out.println(filename);
 			JSONArray jsonArray = new JSONArray(temp);
