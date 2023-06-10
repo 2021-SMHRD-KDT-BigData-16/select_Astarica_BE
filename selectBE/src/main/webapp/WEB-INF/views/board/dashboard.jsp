@@ -29,11 +29,11 @@
 <%
 ArrayList<Csv> contents = (ArrayList<Csv>) session.getAttribute("csv");
 
-HashMap<String, Integer> labelCountMap = new HashMap<>();
 HashMap<String, Integer> ratioCountMap = new HashMap<>();
 HashMap<String, Integer> wideCountMap = new HashMap<>();
 HashMap<String, Integer> bwideCountMap = new HashMap<>();
 
+HashMap<String, Integer> labelCountMap = new HashMap<>();
 for (Csv csv : contents) {
     String label = csv.getLabel();
     if (labelCountMap.containsKey(label)) {

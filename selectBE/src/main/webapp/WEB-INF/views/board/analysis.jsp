@@ -113,101 +113,271 @@
         </div>
 
         <div class="details">
-            <!-- order details list -->
-            <div class="recentOrders"> 
-                <div class="cardHeader">                    
-                    <h3>Display view</h3> 
-                    <ion-icon name="chevron-back-outline"></ion-icon>
+            
+            <!-- 모달창 -->
+            <div id="modalBox">
+                <div class="scoreBox">
+                    <button id="btn-modal">score</button> 
                 </div>
-                <hr>
-                <div class="display">                    
-                    <h>Display</h> 
-                    <a href="#" class="btn">Add</a>
-                </div>          
-                <select name="displayselect" id="display-id">  
-                    <option value="">GT Class</option>  
-                    <option value="None">None</option>  
-                    <option value="오답">오답</option>  
-                    <option value="(문휘)Split">(문휘)Split</option>
-                    <option value="test set와 관점 분포보기">test set와 관점 분포보기</option>
-                </select>
-                <br>
-                <hr>  
-            <ul>
-                <div class="displayquery">                    
-                    <h3>Display-query</h3> 
-                    <a href="#" class="btn">Edis list</a>
-                </div>     
-                    <table>
-                        <h>List of queries to configure display view. You can add and<br> <span>manage queries.</span></h>
-                        <thead>
-                            <div class="querylist">                    
-                                <h4>Query list (30)</h4> 
-                                <div class="listtoggle">
-                                <h>Number of data included</h>
-                                <label class="toggle" for="myToggle">
-                                    <input class="toggle__input" name="" type="checkbox" id="myToggle">
-                                    <div class="toggle__fill"></div>
-                                </label>
-                                </div>
-                            </div>
-                            <tr>
-                                <td>Name</td>
-                                <td>Price</td>
-                                <td>Payment</td>
-                                <td>Status</td>
-                            </tr>
-                        </thead>
-                     <tbody>
-                        <tr>
-                           <td>Star Refrigerator</td> 
-                           <td>$1200</td> 
-                           <td>Paid</td> 
-                            <td><span class="status delivered">Deliverd</span></td>
-                        </tr>
-                        <tr>
-                            <td>Wall Fan/td> 
-                            <td>$110</td> 
-                            <td>Paid</td> 
-                             <td><span class="status pending">Pending</span></td>
-                         </tr>
-                         <tr>
-                            <td>Adidas Shoes</td> 
-                            <td>$620</td> 
-                            <td>Paid</td> 
-                             <td><span class="status return">Return</span></td>
-                         </tr>
-                         <tr>
-                            <td>Denim Shirts</td> 
-                            <td>$110</td> 
-                            <td>Due</td> 
-                             <td><span class="status inprogress">In Progress</span></td>
-                         </tr>
-                         <tr>
-                            <td>Casual Shoes</td> 
-                            <td>$575</td> 
-                            <td>Paid</td> 
-                             <td><span class="status pending">Pending</span></td>
-                         </tr>
-                    </tbody>
-                </table>
-                </ul>    
-            </div>
-        </div>
-      
-           
 
-        
+                <div class="details2">
+                    <!-- 디스플레이 박스 -->
+                    <div class="displayBox"> 
+                        <div class="cardHeader">                    
+                            <h3>Display view</h3> 
+                            <ion-icon name="chevron-back-outline"></ion-icon> 
+                        </div>
+
+                    <ul>
+                        <div class="displayquery">                    
+                            <h3>Display-query</h3> 
+                        </div> 
+                                <h>List of queries to configure display view.</h>
+                                <thead>
+                                    <div class="querylist">                    
+                                        <h4>Query list (30)</h4> 
+                                        <div class="listtoggle">
+                                        <h>Number of data included</h>
+                                        <label class="toggle_analysis" for="myToggle">
+                                            <input class="toggle__input" name="" type="checkbox" id="myToggle">
+                                            <div class="toggle__fill"></div>
+                                        </label>
+                                        </div>
+                                    </div>
+                                </thead>
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td><ion-icon name="chevron-forward-outline"></ion-icon></td>
+                                            <td>Park</td>
+                                            <td>350 (3.50%)</td>
+                                            <td><div class="toggle-container">
+                                                <div class="toggle-switch">
+                                                    <input class="toggle-input" type="checkbox" id="toggle-1">
+                                                    <label class="toggle-slider" for="toggle-1"></label>
+                                                </div>
+                                            </div>    
+                                            </td>                                            
+                                        </tr>
+                                        <tr>
+                                            <td><ion-icon name="chevron-forward-outline"></ion-icon></td>
+                                            <td>SparseResidential</td>
+                                            <td>300 (3.00%)</td>
+                                            <td><div class="toggle-container">
+                                                <div class="toggle-switch">
+                                                    <input class="toggle-input" type="checkbox" id="toggle-2">
+                                                    <label class="toggle-slider" for="toggle-2"></label>
+                                                </div>
+                                            </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><ion-icon name="chevron-forward-outline"></ion-icon></td>
+                                            <td>DenseResidential</td>
+                                            <td>410 (4.10%)</td>
+                                            <td><div class="toggle-container">
+                                                <div class="toggle-switch">
+                                                    <input class="toggle-input" type="checkbox" id="toggle-3">
+                                                    <label class="toggle-slider" for="toggle-3"></label>
+                                                </div>
+                                            </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><ion-icon name="chevron-forward-outline"></ion-icon></td>
+                                            <td>Parking</td>
+                                            <td>390 (3.90%)</td>
+                                            <td><span class="status parking"><div class="toggle-container">
+                                                <div class="toggle-switch">
+                                                    <input class="toggle-input" type="checkbox" id="toggle-4">
+                                                    <label class="toggle-slider" for="toggle-4"></label>
+                                                </div>
+                                            </div></span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><ion-icon name="chevron-forward-outline"></ion-icon></td>
+                                            <td>Beach</td>
+                                            <td>400 (4.00%)</td>
+                                            <td><div class="toggle-container">
+                                                <div class="toggle-switch">
+                                                    <input class="toggle-input" type="checkbox" id="toggle-5">
+                                                    <label class="toggle-slider" for="toggle-5"></label>
+                                                </div>
+                                            </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><ion-icon name="chevron-forward-outline"></ion-icon></td>
+                                            <td>Industrial</td>
+                                            <td>390 (3.90%)</td>
+                                            <td><div class="toggle-container">
+                                                <div class="toggle-switch">
+                                                    <input class="toggle-input" type="checkbox" id="toggle-6">
+                                                    <label class="toggle-slider" for="toggle-6"></label>
+                                                </div>
+                                            </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table> 
+                        </ul>    
+                    </div>
+                    <div class="container2">
+                        <!-- 이미지 확대 영역 -->
+                        <div id="enlargedArea" class="enlarged-image">
+                            <img id="enlargedImg">
+                        </div>
+                    </div>
+                    
+                    <!-- 이미지 리스트 -->
+                    <div class = "pictureList">
+                        <div class="pictureTable">
+                            <!--  <img src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg" alt="" class="image" onclick="enlargeImage(this)" height=90 width=95/>
+                            <img src="../dashboard.img/user.jpg" alt="" class="image2" onclick="enlargeImage(this)" height=90 width=95/>
+                            <img src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg" alt="" class="image" onclick="enlargeImage(this)" height=90 width=95/>
+                            -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 모달창 -->
+            <div id="modal" class="modal-overlay">
+                <div class="modal-window">
+                    <div class="title">
+                        <p>Dataset Score</p>
+                    </div>
+                    <!-- 모달창 닫는 버튼 -->
+                    <div class="close-area">X</div>
+                    <div class="content">
+
+                <!-- 점수 box -->
+                <div class="scoreBox">
+                <!-- 점수 (반원그래프)  -->
+                <div>
+                    <canvas id="chart"></canvas>        
+                </div>
+                <!-- 세부 점수  -->
+                <div class="skillContainer">
+            <div class="skillBox">
+                <span class="title">균일성</span>
+    
+                <div class="skillBar">
+                    <span class="uniPer">
+                        <span class="tooltip">70%</span>
+                    </span>
+                </div>
+            </div>
+    
+            <div class="skillBox">
+                <span class="title">충분성</span>
+    
+                <div class="skillBar">
+                    <span class="suffiPer">
+                        <span class="tooltip">65%</span>
+                    </span>
+                </div>
+
+            </div>
+    
+            <div class="skillBox">
+                <span class="title">적합성</span>
+    
+                <div class="skillBar">
+                    <span class="suitPer">
+                        <span class="tooltip">80%</span>
+                    </span>
+                </div>
+            </div>
+    
+            <div class="skillBox">
+                <span class="title">Bbox</span>
+    
+                <div class="skillBar">
+                    <span class="bboxPer">
+                        <span class="tooltip">75%</span>
+                    </span>
+                </div>
+            </div>
+    
+        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+
+    
+                </div>
+            </div>
+
 
     </div>        
 </div>
 
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
- 
+    <script src="https://kit.fontawesome.com/6377d08cc4.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.3.0/dist/chart.umd.min.js"></script>
+    <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.0.min.js"></script> 
+    <script type="text/javascript" charset="utf-8" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script> 
+    
     <script>
         // MenuToggle
-        let toggle = document.querySelector('.toggle');
+        var ctx = document.getElementById('chart').getContext('2d');
+		var score = 85; // 예시로 85점을 설정하였습니다.
+	
+		var chart = new Chart(ctx, {
+			type: 'doughnut',
+			data: {
+				datasets: [{
+					data: [score, 100 - score],
+					backgroundColor: ['#287bff', '#ccc'],
+					borderWidth: 0
+					}]
+					},
+			options: {
+			cutoutPercentage: 70,
+			rotation: 1 * Math.PI,
+			circumference: 1 * Math.PI,
+			responsive: false,
+			legend: {
+				display: false
+			},
+			tooltips: {
+				enabled: false
+			}
+		}
+
+		});
+
+		// 반원 도넛 차트 안에 점수
+		Chart.pluginService.register({
+			beforeDraw: function(chart) {
+				var width = chart.chart.width,
+				height = chart.chart.height,
+				ctx = chart.chart.ctx;
+				ctx.restore();
+				var fontSize = 100;
+
+				ctx.font = fontSize + "MBC1961M";
+				ctx.textBaseline = "middle";
+				var text = "75",
+				textX = Math.round((width - ctx.measureText(text).width) / 2),
+				textY = height / 1.35;
+				ctx.fillText(text, textX, textY);
+				ctx.save();
+			}
+		});
+
+
+        let toggle = document.querySel 4ector('.toggle');
         let navigation = document.querySelector('.navigation');
         let main = document.querySelector('.main');
 
@@ -225,6 +395,35 @@
         }
         list.forEach((item) =>
         item.addEventListener('mouseover',activeLink));
+
+        // 이미지 확대 함수
+        function enlargeImage(image) {
+            var enlargedArea = document.getElementById('enlargedArea');
+            var enlargedImg = document.getElementById('enlargedImg');
+    
+            enlargedImg.src = image.src;
+            enlargedArea.style.display = 'flex';
+        }
+    
+        // 이미지 확대 영역 닫기
+        document.getElementById('enlargedArea').addEventListener('click', function (e) {
+            if (e.target === this) {
+            this.style.display = 'none';
+            }
+        });
+
+        // 버튼을 누르면 모달창 뜨게 하기
+        const modal = document.getElementById("modal")
+        const btnModal = document.getElementById("btn-modal")
+            btnModal.addEventListener("click", e => {
+            modal.style.display = "flex"
+        })
+
+       // 모달창 닫기 버튼 
+        const closeBtn = modal.querySelector(".close-area")
+            closeBtn.addEventListener("click", e => {
+            modal.style.display = "none"
+        });
     </script>
 </body>
 </html>

@@ -65,11 +65,6 @@ public class AccountsInfoController {
 			return "board/login_register";
 		}
 	//------------------------------------------------------REGISTER USER---------------------------------------------------------//
-//		@GetMapping("/register") 
-//		public String register() {
-//			
-//			return "board/register";
-//		}
 		
 		@PostMapping("/register") 
 		public String register(AccountsInfo mvo) {		
@@ -104,8 +99,12 @@ public class AccountsInfoController {
 			return "board/analysis";
 		}
 		@GetMapping("/dashboard_model") 
-		public String dashboard_model() {
-			
+		public String dashboard_model(HttpSession session,Model model) {
+			String name= (String) session.getAttribute("file_name");
+			System.out.println(name);
+			String[] teset = name.split("[.]");
+			String path = teset[0];
+			session.setAttribute("filepath", path);
 			return "board/dashboard_model";
 		}
 		@GetMapping("/dashboard_label") 
@@ -119,7 +118,6 @@ public class AccountsInfoController {
 			
 			String temp = request.getParameter("json");
 			String filename = request.getParameter("file");
-			filename = filename.toUpperCase();
 			System.out.println(temp);
 			System.out.println(filename);
 			JSONArray jsonArray = new JSONArray(temp);
@@ -151,16 +149,16 @@ public class AccountsInfoController {
 				contents.add(csv);
 			}
 			
-			System.out.println(contents.size());
-			for (int j=0; j<contents.size(); j++) {
-				System.out.println(contents.get(j).getImagePath());
-				System.out.println(contents.get(j).getLabel());
-				System.out.println(contents.get(j).getPoint1_x());
-				System.out.println(contents.get(j).getPoint1_y());
-				System.out.println(contents.get(j).getPoint2_x());
-				System.out.println(contents.get(j).getPoint2_y());
-				System.out.println(contents.get(j).getShapeNum());
-			}
+//			System.out.println(contents.size());
+//			for (int j=0; j<contents.size(); j++) {
+//				System.out.println(contents.get(j).getImagePath());
+//				System.out.println(contents.get(j).getLabel());
+//				System.out.println(contents.get(j).getPoint1_x());
+//				System.out.println(contents.get(j).getPoint1_y());
+//				System.out.println(contents.get(j).getPoint2_x());
+//				System.out.println(contents.get(j).getPoint2_y());
+//				System.out.println(contents.get(j).getShapeNum());
+//			}
 			session.setAttribute("csv", contents);
 			session.setAttribute("file_name", filename);
 	        return "board/dashboard";

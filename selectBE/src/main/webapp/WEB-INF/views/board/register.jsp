@@ -21,7 +21,8 @@
             <div class="form-value">
                 <form method="POST" action="${cpath}/register">
                     <h2>Register</h2>
-                    <div class="inputbox">
+                    <div class="inpu
+                    tbox">
                         <ion-icon name="mail-outline"></ion-icon>
                         <input type="email" name = "user_id" required>
                         <label for="">Email</label>
