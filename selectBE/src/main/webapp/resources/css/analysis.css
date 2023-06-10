@@ -289,6 +289,8 @@ body
     box-shadow: 0 7px 25px rgba(0,0,0,0.08);
     border-radius: 20px;
 }
+
+
 .cardHeader,
 .display,
 .displayquery,
@@ -526,8 +528,9 @@ a{
     box-shadow: 0 7px 25px rgba(0,0,0,0.08);
     border-radius: 2px;
   }
-
+ 
   #enlargedArea img{
+    
     width: 50%;
     padding-left: 16%;
     padding-top: 8%;
@@ -549,9 +552,33 @@ a{
   
   .pictureTable{
     width:400px;
-    height: 518px;
+    height: 720px;
     overflow-y: scroll ;
     overflow-x: hidden;
+  }
+
+  .container2{
+    box-shadow: 0 7px 25px rgba(0,0,0,0.08);
+    border-radius: 20px;
+  }
+  .imgcontainer{
+    display : flex;
+    justify-content: center;
+    align-items : center;
+    padding: 100px 0;
+    overflow:hidden;
+  }
+  .deactive{
+    display: none;
+  }
+  .imgtable{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .imgtable img{
+    height: 30em;
+    object-fit:contain;
   }
     /* 이미지 확대 스타일 */
   .details2 .enlarged-image {
@@ -560,7 +587,7 @@ a{
     left: 0;
     width: 100%;
     height: 100%;
-    display: flex;
+    /* display: flex; */
     justify-content: center;
     align-items: center;
   }
@@ -633,19 +660,24 @@ a{
 .scoreBox #btn-modal{
     background-color: var(--blue);
     border: none;
-    color: white;
+    color: var(--white);
     width: 80px;
     height: 35px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
-    font-family: sans-serif;
+    font-family: 'Happiness-Sans-Bold';
     cursor: pointer;
     border-radius: 20px;
-    box-shadow: 0px 0px 10px 0px #287bff;
+    box-shadow: 0px 0px 5px 0px #287bff;
     float: right;
 }
+.scoreBox #btn-modal:hover{
+    color: var(--blue);
+    background: var(--white);
+}
+
 
 .scoreBox #chart {
     margin-top: 70px;
@@ -931,4 +963,12 @@ a{
         left: 0;
     }
 }
+.pictureTable{
+    width: 330px;
+}
+.image{
+    margin-top: 5px;
+}
+
+
 

@@ -132,15 +132,26 @@ for (Csv csv : contents) {
               </div>
             </div>
         
-        <!-- 데이터 정보 card -->
+        <!-- Data 정보 박스 -->
         <div class="cardBox">
+            <div class="card">
+                <div class="iconBx">
+                    <ion-icon name="id-card-outline"></ion-icon>
+                </div> 
+                <div>
+                    <div class="cardName">Plan</div>
+                    <div class="numbers">Free</div>
+                </div>
+			</div>
+        
             <div class="card">
                 <div class="iconBx">
                     <ion-icon name="server-outline"></ion-icon>
                 </div> 
                 <div>
                     <div class="cardName">Data</div>
-                    <div class="numbers">10,000</div>
+                    <c:set var="count" value="${fn:length(works)}" />
+					<div class="numbers">${count}</div>
                 </div>
             </div>
             <div class="card">
@@ -148,26 +159,26 @@ for (Csv csv : contents) {
                     <ion-icon name="folder-outline"></ion-icon>
                 </div> 
                 <div>
-                    <div class="cardName">Slice</div>
-                    <div class="numbers">1</div>
+                    <div class="cardName">Left</div>
+                    <c:set var="left" value="${10 - count}" />
+                    <div class="numbers">${left}</div>
                 </div>
             </div>
+
+            
             <div class="card">
                 <div class="iconBx">
-                    <ion-icon name="options-outline"></ion-icon>
+                    <ion-icon name="calendar-number-outline"></ion-icon>
                 </div> 
                 <div>
-                    <div class="cardName">Custom Filter</div>
-                    <div class="numbers">9</div>
-                </div>
-                </div>
-            <div class="card">
-                <div class="iconBx">
-                    <ion-icon name="bookmark-outline"></ion-icon>
-                </div> 
-                <div>
-                    <div class="cardName">Tag</div>
-                    <div class="numbers">5</div>
+                    <div class="cardName">Last Updated</div>
+                    <c:set var="lstDate" value="" />
+					<c:forEach var="work" items="${works}" varStatus="status">
+  						<c:if test="${empty lstDate or work.od_date > lstDate}">
+    						<c:set var="lstDate" value="${work.od_date}" />
+  						</c:if>
+					</c:forEach>
+                    <div class="numbers">${lstDate}</div>
                 </div>
             </div>
         </div>

@@ -52,7 +52,7 @@ public class AccountsInfoController {
 		if (user != null) {
 			List<OriginDataInfo> works = o_mapper.getLists(mvo);
 			session.setAttribute("mvo", user);
-			model.addAttribute("works", works);
+			session.setAttribute("works", works);
 			return "board/mainpage";
 		}
 		return "board/login_register";
@@ -102,6 +102,7 @@ public class AccountsInfoController {
 		public String dashboard_model(HttpSession session,Model model) {
 			String name= (String) session.getAttribute("file_name");
 			System.out.println(name);
+			// 파일 이름 객체 바인딩 후 이동!
 			String[] teset = name.split("[.]");
 			String path = teset[0];
 			session.setAttribute("filepath", path);
@@ -140,25 +141,15 @@ public class AccountsInfoController {
 				double ratio = element.getDouble("ratio");
 				String ratio_temp = Double.toString(ratio);
 				csv.setRatio(ratio_temp);
-				double wide = element.getDouble("wide");
-				String wide_temp = Double.toString(wide);
-				csv.setWide(wide_temp);
-				double bwide = element.getDouble("bwide");
-				String bwide_temp = Double.toString(bwide);
-				csv.setBwide(bwide_temp);
+//				double wide = element.getDouble("wide");
+//				String wide_temp = Double.toString(wide);
+//				csv.setWide(wide_temp);
+//				double bwide = element.getDouble("bwide");
+//				String bwide_temp = Double.toString(bwide);
+//				csv.setBwide(bwide_temp);
 				contents.add(csv);
 			}
 			
-//			System.out.println(contents.size());
-//			for (int j=0; j<contents.size(); j++) {
-//				System.out.println(contents.get(j).getImagePath());
-//				System.out.println(contents.get(j).getLabel());
-//				System.out.println(contents.get(j).getPoint1_x());
-//				System.out.println(contents.get(j).getPoint1_y());
-//				System.out.println(contents.get(j).getPoint2_x());
-//				System.out.println(contents.get(j).getPoint2_y());
-//				System.out.println(contents.get(j).getShapeNum());
-//			}
 			session.setAttribute("csv", contents);
 			session.setAttribute("file_name", filename);
 	        return "board/dashboard";
