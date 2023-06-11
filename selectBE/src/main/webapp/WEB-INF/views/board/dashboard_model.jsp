@@ -138,34 +138,50 @@
             
         </div>
             <!-- Add Charts -->
-            <div class="graphBox">
-                <div class="graphTitle">
-                    <p>Details by model metric</p>
-                </div>
-                <div class="predic_box">
-                    <div class="prediction">
-                        <canvas id="prediction"></canvas>
+             <div class="graphBox">
+                <div class="box1">
+                    <div class="selectBox">
+                        
+                        <select name="bgvalue" id="">
+                            <option selected>원본</option>
+                            <option value="25%">25%</option>
+                            <option value="25%">50%</option>
+                            <option value="25%">75%</option>
+                            <option value="25%">80%</option>
+                            <option value="25%">85%</option>
+                        </select>
                     </div>
-                </div>
-                <div class="graphOption">
-                    <div class="graphButton">
-                        <div class="predic_check">
-                            <input type="radio" id="predic_check" name="predic_check"/>
-                            <p>prediction</p>
+                    <div class="pictureList">
+                        <div class="pictureTable">
+                            <img src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg" alt="" class="can deactive" onclick="enlargeImage(this)" height=90 width=95/>
+                            <img src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg" alt="" class="can deactive" onclick="enlargeImage(this)" height=90 width=95/>
+                            <img src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg" alt="" class="can deactive" onclick="enlargeImage(this)" height=90 width=95/>
+                            <img src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg" alt="" class="can deactive" onclick="enlargeImage(this)" height=90 width=95/>
+                            <img src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg" alt="" class="can deactive" onclick="enlargeImage(this)" height=90 width=95/>
+                            <img src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg" alt="" class="can deactive" onclick="enlargeImage(this)" height=90 width=95/>
+                            <img src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg" alt="" class="can deactive" onclick="enlargeImage(this)" height=90 width=95/>
+                            <img src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg" alt="" class="can deactive" onclick="enlargeImage(this)" height=90 width=95/>
+                            <img src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg" alt="" class="can deactive" onclick="enlargeImage(this)" height=90 width=95/>
+                            <img src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg" alt="" class="can deactive" onclick="enlargeImage(this)" height=90 width=95/>
+                            <img src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg" alt="" class="can deactive" onclick="enlargeImage(this)" height=90 width=95/>
+                            <img src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg" alt="" class="can deactive" onclick="enlargeImage(this)" height=90 width=95/>
+                            <img src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg" alt="" class="can deactive" onclick="enlargeImage(this)" height=90 width=95/>
+                            <img src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg" alt="" class="pack deactive" onclick="enlargeImage(this)" height=90 width=95/>                            
                         </div>
                     </div>
                 </div>
-                <div class="graph">
-                    <div class="graph1">
-                        <canvas id="bar"></canvas>
-                    </div>
-                    <div class="graph2">
-                        <canvas id="doughnut"></canvas>
+                <div class="box2">
+                    <div class="imgcontainer">
+                        <div class="titleBox">Original Image</div>
+                        <div class="imgtable"></div>
                     </div>
                 </div>
-                
-
-
+                <div class="box3">
+                    <div class="imgcontainer">
+                        <div class="titleBox">changed image</div>
+                        <div class="imgtable"></div>
+                    </div>
+                </div>
             </div>
         </div>    
 
@@ -179,8 +195,13 @@
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
     <script src="https://kit.fontawesome.com/7872e4b187.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.3.0/dist/chart.umd.min.js"></script>
+    <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.0.min.js"></script> 
     <script src="../js/dashboard_model.js"></script>
     <script>
+    	function enlargeImage(image) {
+	        $('.imgtable').html("<img>");
+        	$('.imgtable img').attr('src',image.src);
+    	};
         // MenuToggle
         let toggle = document.querySelector('.toggle');
         let navigation = document.querySelector('.navigation');
@@ -200,6 +221,8 @@
         }
         list.forEach((item) =>
         item.addEventListener('mouseover',activeLink));
+        
+        
     </script>
 </body>
 </html>
