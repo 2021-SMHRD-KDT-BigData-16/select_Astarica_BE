@@ -130,20 +130,12 @@
         <!-- option 고르기 -->
         <div class="optionHead">
             <div class="tap">
-                <a href="http://127.0.0.1:5500/main/html/dashboard.html">
-                    <p>Metadata</p>
-                </a>
+                <a href="${cpath}/dashboard" class="custom-button">Metadata</a>
             </div>
             <div class="tap">
-                <a href="http://127.0.0.1:5500/main/html/dashboard_model.html">
-                    <p>Model metric</p>
-                </a>
+                <a href="${cpath}/dashboard_model" class="custom-button">Model metric</a>
             </div>
-            <div class="tap">
-                <a href="http://127.0.0.1:5500/main/html/dashboard_label.html">
-                    <p>Label Key / Class</p>
-                </a>
-            </div>
+            
         </div>
             <!-- Add Charts -->
             <div class="graphBox">

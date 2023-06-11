@@ -3,6 +3,7 @@ package com.peachs.controller;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -94,8 +95,15 @@ public class AccountsInfoController {
 			return "board/dashboard";
 		}
 		@GetMapping("/analysis") 
-		public String analysis() {
-			
+		public String analysis(HttpSession session,Model model) {
+			ArrayList<Csv> csv =  (ArrayList<Csv>)session.getAttribute("csv");
+			model.addAttribute("csv", csv);
+			String name= (String) session.getAttribute("file_name");
+			System.out.println(name);
+			// 파일 이름 객체 바인딩 후 이동!
+			String[] teset = name.split("[.]");
+			String path = teset[0];
+			session.setAttribute("filepath", path);
 			return "board/analysis";
 		}
 		@GetMapping("/dashboard_model") 
@@ -106,6 +114,7 @@ public class AccountsInfoController {
 			String[] teset = name.split("[.]");
 			String path = teset[0];
 			session.setAttribute("filepath", path);
+			
 			return "board/dashboard_model";
 		}
 		@GetMapping("/dashboard_label") 

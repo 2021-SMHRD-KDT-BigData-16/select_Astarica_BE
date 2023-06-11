@@ -186,20 +186,12 @@ for (Csv csv : contents) {
         <!-- option 고르기 -->
         <div class="optionHead">
             <div class="tap">
-                <a href="${cpath}/dashboard">
-                    <p>Metadata</p>
-                </a>
+                <a href="${cpath}/dashboard" class="custom-button">Metadata</a>
             </div>
             <div class="tap">
-                <a href="${cpath}/dashboard_model">
-                    <p>Model metric</p>
-                </a>
+                <a href="${cpath}/dashboard_model" class="custom-button">Model metric</a>
             </div>
-            <div class="tap">
-                <a href="${cpath}/dashboard_label">
-                    <p>Label Key / Class</p>
-                </a>
-            </div>
+            
         </div>
 
         <div class="optionContainer">

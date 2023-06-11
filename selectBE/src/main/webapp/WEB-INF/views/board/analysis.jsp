@@ -1,5 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@page import="java.util.List"%>
+<%@page import="java.util.Set"%>
+<%@page import="java.util.Collections"%>
+<%@page import="java.util.Iterator"%>
+<%@page import="com.peachs.entity.AccountsInfo"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.peachs.entity.Csv"%>
+<%@page import="java.util.HashMap" %>
 <%@page import="com.peachs.entity.AccountsInfo"%>
 <%@ taglib prefix ="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix ="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -65,19 +72,17 @@
               <div class="toggle">
                 <ion-icon name="menu-outline"></ion-icon>
               </div>
-              <!-- search -->  
-              <div class="search">
-                <label>
-                   <input type="text" placeholder="Search here"> 
-                   <ion-icon name="search-outline"></ion-icon>
-                </label>
+              <!-- Header -->
+              <div class="temHeader">
+                <div class="dataName">
+                     <p>${file_name}</p>
+                </div>
               </div>
               <!-- userImg -->
               <div class="user">
                 <img src="../dashboard.img/user.jpg">
               </div>
-            </div>
-        
+        </div>
 
         <!-- Data 정보 박스 -->
         <div class="cardBox">
@@ -152,8 +157,9 @@
                         </div> 
                                 <h>List of queries to configure display view.</h>
                                 <thead>
+                                <% ArrayList<Csv> contents = (ArrayList<Csv>) session.getAttribute("csv");%>
                                     <div class="querylist">                    
-                                        <h4>Query list (30)</h4> 
+                                        <h4>All Data (<%=contents.size()%>)</h4> 
                                         <div class="listtoggle">
                                         <h>Number of data included</h>
                                         <label class="toggle_analysis" for="myToggle">
@@ -165,90 +171,40 @@
                                 </thead>
                                 <table>
                                     <tbody>
-                                        <tr>
+                                    	<% HashMap<String, Integer> labelCountMap = new HashMap<>();
+                                       	
+                                    	for (Csv csv : contents) {
+                                    		String label = csv.getLabel();
+                                    	    if (labelCountMap.containsKey(label)) {
+                                    	        int count = labelCountMap.get(label);
+                                    	        labelCountMap.put(label, count + 1);
+                                    	    } else {
+                                    	        labelCountMap.put(label, 1);
+                                    	    }
+                                    	} %>
+                                    	<% Set set = labelCountMap.keySet();
+                                    	Iterator iterator = set.iterator();
+                                    	ArrayList<String> labels = new ArrayList<>(set);
+                                    	Collections.sort(labels);
+                                    	int i=0;
+                                    	%>
+                                    	<%for (String labe : labels) {%>
+                                    	<% i++;%>
+                                    	<% double rate = (double)((labelCountMap.get(labe))*100/(contents.size()));%>
+                                    	<tr>
                                             <td><ion-icon name="chevron-forward-outline"></ion-icon></td>
-                                            <td>Park</td>
-                                            <td>350 (3.50%)</td>
+                                            <td><%=labe%></td>
+                                           
+                                            <td><%=labelCountMap.get(labe)%>(<%=rate%>%)</td>
                                             <td><div class="toggle-container">
                                                 <div class="toggle-switch">
-                                                    <input class="toggle-input" type="checkbox" id="toggle-1" name="check" value="can">
-                                                    <label class="toggle-slider" for="toggle-1"></label>
+                                                    <input class="toggle-input" type="checkbox" id="toggle-<%=i%>" name="check" value="<%=labe%>">
+                                                    <label class="toggle-slider" for="toggle-<%=i%>"></label>
                                                 </div>
                                             </div>    
                                             </td>                                            
                                         </tr>
-                                        <tr>
-                                            <td><ion-icon name="chevron-forward-outline"></ion-icon></td>
-                                            <td>SparseResidential</td>
-                                            <td>300 (3.00%)</td>
-                                            <td><div class="toggle-container">
-                                                <div class="toggle-switch">
-                                                    <input class="toggle-input" type="checkbox" id="toggle-2" name="check" value="glass">
-                                                    <label class="toggle-slider" for="toggle-2"></label>
-                                                </div>
-                                            </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td><ion-icon name="chevron-forward-outline"></ion-icon></td>
-                                            <td>DenseResidential</td>
-                                            <td>410 (4.10%)</td>
-                                            <td><div class="toggle-container">
-                                                <div class="toggle-switch">
-                                                    <input class="toggle-input" type="checkbox" id="toggle-3" name="check" value="pack">
-                                                    <label class="toggle-slider" for="toggle-3"></label>
-                                                </div>
-                                            </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td><ion-icon name="chevron-forward-outline"></ion-icon></td>
-                                            <td>Parking</td>
-                                            <td>390 (3.90%)</td>
-                                            <td><span class="status parking"><div class="toggle-container">
-                                                <div class="toggle-switch">
-                                                    <input class="toggle-input" type="checkbox" id="toggle-4" name="check" value="paper">
-                                                    <label class="toggle-slider" for="toggle-4"></label>
-                                                </div>
-                                            </div></span>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td><ion-icon name="chevron-forward-outline"></ion-icon></td>
-                                            <td>Beach</td>
-                                            <td>400 (4.00%)</td>
-                                            <td><div class="toggle-container">
-                                                <div class="toggle-switch">
-                                                    <input class="toggle-input" type="checkbox" id="toggle-5" name="check" value="pet">
-                                                    <label class="toggle-slider" for="toggle-5"></label>
-                                                </div>
-                                            </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td><ion-icon name="chevron-forward-outline"></ion-icon></td>
-                                            <td>Industrial</td>
-                                            <td>390 (3.90%)</td>
-                                            <td><div class="toggle-container">
-                                                <div class="toggle-switch">
-                                                    <input class="toggle-input" type="checkbox" id="toggle-6" name="check" value="plastic">
-                                                    <label class="toggle-slider" for="toggle-6"></label>
-                                                </div>
-                                            </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td><ion-icon name="chevron-forward-outline"></ion-icon></td>
-                                            <td>Industrial</td>
-                                            <td>390 (3.90%)</td>
-                                            <td><div class="toggle-container">
-                                                <div class="toggle-switch">
-                                                    <input class="toggle-input" type="checkbox" id="toggle-7" name="check" value="vinyl">
-                                                    <label class="toggle-slider" for="toggle-7"></label>
-                                                </div>
-                                            </div>
-                                            </td>
-                                        </tr>
+                                    	<% } %>
                                     </tbody>
                                 </table> 
                         </ul>    
@@ -262,21 +218,14 @@
                         </div>
                     </div>
                     
+                    
                     <!-- 이미지 리스트 -->
                     <div class = "pictureList">
                         <div class="pictureTable">
-                        	<img src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg" alt="" class="paper deactive" onclick="enlargeImage(this)" height=90 width=95/>
-							<img src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg" alt="" class="pet deactive" onclick="enlargeImage(this)" height=90 width=95/>
-							<img src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg" alt="" class="plastic deactive" onclick="enlargeImage(this)" height=90 width=95/>
-							<img src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg" alt="" class="glass deactive" onclick="enlargeImage(this)" height=90 width=95/>
-							<img src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg" alt="" class="vinyl deactive" onclick="enlargeImage(this)" height=90 width=95/>
-							<img src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg" alt="" class="can deactive" onclick="enlargeImage(this)" height=90 width=95/>
-							<img src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg" alt="" class="pack deactive" onclick="enlargeImage(this)" height=90 width=95/>
-							<img src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg" alt="" class="paper deactive" onclick="enlargeImage(this)" height=90 width=95/>
-							<img src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg" alt="" class="pet deactive" onclick="enlargeImage(this)" height=90 width=95/>
-							<img src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg" alt="" class="plastic deactive" onclick="enlargeImage(this)" height=90 width=95/>
-							<img src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg" alt="" class="glass deactive" onclick="enlargeImage(this)" height=90 width=95/>
-                            <img src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg" alt="" class="vinyl deactive" onclick="enlargeImage(this)" height=90 width=95/>
+                        	<% for (int j=0; j<contents.size(); j++) {%>
+              					<img src="/images/${filepath}/<%=contents.get(j).getImagePath()%>" class="<%=contents.get(j).getLabel()%> deactive" onclick="enlargeImage(this)" height=90 width=95/>   		
+                        	<%} %>
+
                         </div>
                     </div>
                 </div>
