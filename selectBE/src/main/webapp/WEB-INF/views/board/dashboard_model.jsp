@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@page import="java.util.List"%>
+<%@page import="com.peachs.entity.Csv"%>
+<%@page import="java.util.ArrayList"%>
 <%@page import="com.peachs.entity.AccountsInfo"%>
 <%@ taglib prefix ="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix ="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -135,50 +137,47 @@
             <div class="tap">
                 <a href="${cpath}/dashboard_model" class="custom-button">Model metric</a>
             </div>
-            
         </div>
             <!-- Add Charts -->
              <div class="graphBox">
                 <div class="box1">
                     <div class="selectBox">
-                        
-                        <select name="bgvalue" id="">
-                            <option selected>원본</option>
-                            <option value="25%">25%</option>
-                            <option value="25%">50%</option>
-                            <option value="25%">75%</option>
-                            <option value="25%">80%</option>
-                            <option value="25%">85%</option>
-                        </select>
+                        <form action="http://127.0.0.1:5000/test" method="post">
+                        	<select name="bgvalue" id="">
+	                            <option selected>원본</option>
+    	                        <option value="25%">25%</option>
+                            	<option value="25%">50%</option>
+                            	<option value="25%">75%</option>
+                            	<option value="25%">80%</option>
+                            	<option value="25%">85%</option>
+                        	</select>
+                        </form>
                     </div>
+                    
+                    <% ArrayList<Csv> contents = (ArrayList<Csv>) session.getAttribute("csv");%>
                     <div class="pictureList">
                         <div class="pictureTable">
-                            <img src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg" alt="" class="can deactive" onclick="enlargeImage(this)" height=90 width=95/>
-                            <img src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg" alt="" class="can deactive" onclick="enlargeImage(this)" height=90 width=95/>
-                            <img src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg" alt="" class="can deactive" onclick="enlargeImage(this)" height=90 width=95/>
-                            <img src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg" alt="" class="can deactive" onclick="enlargeImage(this)" height=90 width=95/>
-                            <img src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg" alt="" class="can deactive" onclick="enlargeImage(this)" height=90 width=95/>
-                            <img src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg" alt="" class="can deactive" onclick="enlargeImage(this)" height=90 width=95/>
-                            <img src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg" alt="" class="can deactive" onclick="enlargeImage(this)" height=90 width=95/>
-                            <img src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg" alt="" class="can deactive" onclick="enlargeImage(this)" height=90 width=95/>
-                            <img src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg" alt="" class="can deactive" onclick="enlargeImage(this)" height=90 width=95/>
-                            <img src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg" alt="" class="can deactive" onclick="enlargeImage(this)" height=90 width=95/>
-                            <img src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg" alt="" class="can deactive" onclick="enlargeImage(this)" height=90 width=95/>
-                            <img src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg" alt="" class="can deactive" onclick="enlargeImage(this)" height=90 width=95/>
-                            <img src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg" alt="" class="can deactive" onclick="enlargeImage(this)" height=90 width=95/>
-                            <img src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg" alt="" class="pack deactive" onclick="enlargeImage(this)" height=90 width=95/>                            
+                            <% for (int j=0; j<contents.size(); j++) {%>
+              					<img src="/images/${filepath}/<%=contents.get(j).getImagePath()%>" class="<%=contents.get(j).getLabel()%> deactive" onclick="enlargeImage(this)" height=90 width=95/>   		
+                        	<%} %>                            
                         </div>
                     </div>
                 </div>
                 <div class="box2">
                     <div class="imgcontainer">
-                        <div class="titleBox">Original Image</div>
-                        <div class="imgtable"></div>
+                        <div class="titleBox">
+                        	<p>Original Image</p>                        	
+                        </div>
+                      
+                        <div class="imgtable">
+                        </div>
                     </div>
                 </div>
                 <div class="box3">
                     <div class="imgcontainer">
-                        <div class="titleBox">changed image</div>
+                        <div class="titleBox">
+                        	<p>Change Image</p>
+                        </div>
                         <div class="imgtable"></div>
                     </div>
                 </div>
@@ -199,8 +198,10 @@
     <script src="../js/dashboard_model.js"></script>
     <script>
     	function enlargeImage(image) {
+    		var imagePath = image.src;
 	        $('.imgtable').html("<img>");
         	$('.imgtable img').attr('src',image.src);
+        	console.log(imagePath);
     	};
         // MenuToggle
         let toggle = document.querySelector('.toggle');

@@ -301,6 +301,27 @@ body
     border: 2px solid var(--blue);
 }
 
+.titleBox p{
+	font-size: 1.1em;
+}
+
+.sbtn{
+	background: var(--white);
+    /* box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08); */
+    /* box-shadow: 0px 0px 10px 0px #287bff; */
+    cursor: pointer;
+    text-align: center;
+    width: 100px;
+    height: 45px;
+    border-radius: 25px;
+    border: 2px solid var(--blue);
+    float: right;
+}
+
+.sbtn:hover{
+	background: var(--blue);
+    color: var(--white);
+}
 .optionHead .tap a
 {
     color: var(--black); 
@@ -367,6 +388,7 @@ body
 .image{
     margin-top: 5px;
 }
+
 .imgtable{
     display: flex;
     justify-content: center;
@@ -380,6 +402,9 @@ body
 
 .titleBox{
     height:30px;
+}
+.titleBox p{
+	font-size: 1.5rem;
 }
 .graphBox .box2
 {
