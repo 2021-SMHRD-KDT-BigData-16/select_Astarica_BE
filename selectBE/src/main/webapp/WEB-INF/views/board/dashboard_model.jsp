@@ -13,6 +13,18 @@
         #my-input {
             visibility: hidden;
         }
+        #loading {
+        background: var(--white);
+        color: var(--blue);
+        font: bold 1em/1.5 "Comfortaa", sans-serif;
+        display: grid;
+        place-items: center;
+        align-content: center;
+        height: 100vh;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        margin-left : 1000px ;
+    }
     </style>
 <head>
     <meta charset="UTF-8">
@@ -20,7 +32,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Select *</title>
     <link rel="stylesheet" href="${cpath}/resources/css/dashboard_model.css">
-    <script src="https://kit.fontawesome.com/7872e4b187.js" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/7872e4b
+    187.js" crossorigin="anonymous"></script>
 </head>
 <body>
 <div class="container">
@@ -28,7 +41,8 @@
             <ul>
                 <li>
                     <a href="${cpath}/mainpage">
-                        <span class="icon"><i class="fa-solid fa-star-of-life" style="color: #ffffff;"></i></span>
+                        <span class="icon"><i class="fa-solid fa-star-of-life fa-lg" style="color: #ffffff;"></i></span>
+                        
                         <span class="title"><h2 class="logo-title">Select Astarica</h2></span>
                     </a>
                 </li>
@@ -39,7 +53,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="${cpath}/dashboard">	
+                    <a href="${cpath}/dashboard">   
                         <span class="icon"><ion-icon name="bar-chart-outline"></ion-icon></span>
                         <span class="title">Dashboard</span>
                     </a>
@@ -88,7 +102,7 @@
                     <div class="cardName">Plan</div>
                     <div class="numbers">Free</div>
                 </div>
-			</div>
+         </div>
         
             <div class="card">
                 <div class="iconBx">
@@ -97,7 +111,7 @@
                 <div>
                     <div class="cardName">Data</div>
                     <c:set var="count" value="${fn:length(works)}" />
-					<div class="numbers">${count}</div>
+               <div class="numbers">${count}</div>
                 </div>
             </div>
             <div class="card">
@@ -119,11 +133,11 @@
                 <div>
                     <div class="cardName">Last Updated</div>
                     <c:set var="lstDate" value="" />
-					<c:forEach var="work" items="${works}" varStatus="status">
-  						<c:if test="${empty lstDate or work.od_date > lstDate}">
-    						<c:set var="lstDate" value="${work.od_date}" />
-  						</c:if>
-					</c:forEach>
+               <c:forEach var="work" items="${works}" varStatus="status">
+                    <c:if test="${empty lstDate or work.od_date > lstDate}">
+                      <c:set var="lstDate" value="${work.od_date}" />
+                    </c:if>
+               </c:forEach>
                     <div class="numbers">${lstDate}</div>
                 </div>
             </div>
@@ -135,38 +149,41 @@
                 <a href="${cpath}/dashboard" class="custom-button">Metadata</a>
             </div>
             <div class="tap">
-                <a href="${cpath}/dashboard_model" class="custom-button">Model metric</a>
+                <a href="${cpath}/dashboard_model" class="custom-button">ImageView</a>
             </div>
         </div>
             <!-- Add Charts -->
              <div class="graphBox">
                 <div class="box1">
                     <div class="selectBox">
-                        <form action="http://127.0.0.1:5000/test" method="post">
-                        	<select name="bgvalue" id="">
-	                            <option selected>원본</option>
-    	                        <option value="25%">25%</option>
-                            	<option value="25%">50%</option>
-                            	<option value="25%">75%</option>
-                            	<option value="25%">80%</option>
-                            	<option value="25%">85%</option>
-                        	</select>
-                        </form>
+                        <p>Data List</p>
+                           <select id="bgvalue" onchange="changeFn()">
+                               <option name="bg" value="25">25%</option>
+                               <option name="bg" value="50">50%</option>
+                               <option name="bg" value="75">75%</option>
+                               <option name="bg" value="80">80%</option>
+                               <option name="bg" value="85">85%</option>
+                           </select>
+                           
                     </div>
+                    <!-- 저장 아이콘 -->
+                    <!-- <div class="saveIcon"><i class="fas fa-regular fa-download" style="color: #287bff;"></i></div> -->
                     
-                    <% ArrayList<Csv> contents = (ArrayList<Csv>) session.getAttribute("csv");%>
+                    <!-- <% ArrayList<Csv> contents = (ArrayList<Csv>) session.getAttribute("csv");%> -->
                     <div class="pictureList">
                         <div class="pictureTable">
+
                             <% for (int j=0; j<contents.size(); j++) {%>
-              					<img src="/images/${filepath}/<%=contents.get(j).getImagePath()%>" class="<%=contents.get(j).getLabel()%> deactive" onclick="enlargeImage(this)" height=90 width=95/>   		
-                        	<%} %>                            
+                             <img src="/images/${filepath}/<%=contents.get(j).getImagePath()%>" class="<%=contents.get(j).getLabel()%> deactive" onclick="enlargeImage(this)" height=90 width=90/>    
+                           <%} %>                            
                         </div>
                     </div>
                 </div>
                 <div class="box2">
                     <div class="imgcontainer">
                         <div class="titleBox">
-                        	<p>Original Image</p>                        	
+                           <p>Original Image</p>
+                           <button class='sbtn' onclick="submitF()">Change</button>
                         </div>
                       
                         <div class="imgtable">
@@ -176,19 +193,34 @@
                 <div class="box3">
                     <div class="imgcontainer">
                         <div class="titleBox">
-                        	<p>Change Image</p>
+                           <p>Change Image</p>
                         </div>
-                        <div class="imgtable"></div>
-                    </div>
+                        <!-- 저장버튼 -->
+                        <button class="saveAll" onclick="dataBuild()">Building data</button>
+                        <!-- 저장 아이콘 -->
+                        <div class="saveIcon">
+                            
+                        </div>
+                        <div class="cimgtable" id="cimgtable"></div>
+                    </div> 
                 </div>
             </div>
         </div>    
-
-        
-        
-
+      <form id='image_frm'>
+         <input type='hidden' id='imageName' name='imageName' value="">
+         <input type='hidden' id='bgvalue' name='bgvalue' value="">
+         <input type='hidden' id='imagePath' name='imagePath' value="${filepath}">
+      </form>
+	<form id="file_frm">
+		<input type='hidden' id='downpath'name="downpath" value="">
+	</form>
     </div>        
 </div>
+   <div id = "loading" >
+       <div class="container">        
+           <i class="fas fa-spinner fa-10x fa-spin"></i>       
+         </div>
+    </div>
 
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
@@ -197,12 +229,85 @@
     <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.0.min.js"></script> 
     <script src="../js/dashboard_model.js"></script>
     <script>
-    	function enlargeImage(image) {
-    		var imagePath = image.src;
-	        $('.imgtable').html("<img>");
-        	$('.imgtable img').attr('src',image.src);
-        	console.log(imagePath);
-    	};
+    $(document).ready(function(){
+      
+         $('#loading').hide(); //첫 시작시 로딩바를 숨겨준다.
+         
+      });
+    	function filedown(){
+    		var fileFrm = $("#file_frm");
+    		fileFrm.attr("action","${cpath}/download");
+    		fileFrm.submit();
+   		};
+       function enlargeImage(image) {
+           $('.imgtable').html("<img>");
+           $('.imgtable img').attr('src',image.src);
+          var imagePath = image.src;
+           var fileName = imagePath.split("/")[5];
+          $('#imageName').attr('value',fileName);
+           console.log($('#imageName').val());
+       };
+      function changeFn(){
+         var bgvalue = $("#bgvalue");
+         var value = $("#bgvalue option:selected").val();
+         $("#bgvalue").attr("value",value);
+      }
+      function submitF(){
+          var imageName = $("#imageName").val();
+          var imagePath = $("#imagePath").val();
+          var value = $("#bgvalue").val();
+          $.ajax({
+                  url : "http://127.0.0.1:5000/image",
+                  type : "post",
+                  data : {imageName: imageName, imagePath:imagePath, value:value},
+                  beforeSend: function() {
+                     //통신을 시작할때 처리
+                     $('#loading').show();
+                     $('.saveAll').show();
+                     
+                },
+                  complete: function() {
+                        //통신이 완료된 후 처리
+                     $('#loading').hide();
+                },
+                  success : function(data){
+                     console.log(data['imagePath']);
+                     var path = "/images/"+data['imagePath'];
+                     console.log(path);
+                     $('#cimgtable').html("<img>");
+                     $('#cimgtable img').attr('src',path);
+                  },
+                  error : function(){alert("error");}
+               });
+       };
+       function dataBuild(){
+           var imagePath = $("#imagePath").val();
+           var value = $("#bgvalue").val();
+           console.log(imagePath);
+           console.log(value);
+           $.ajax({
+                   url : "http://127.0.0.1:5000/data",
+                   type : "post",
+                   data : {imagePath:imagePath, value:value},
+                   beforeSend: function() {
+                      //통신을 시작할때 처리
+                      $('#loading').show();
+                 	},
+                   complete: function() {
+                         //통신이 완료된 후 처리
+                      $('#loading').hide();
+                 	},
+                   success : function(data){
+                	   var zipPath = data['zipPath'];
+                	   $('.saveAll').hide();
+                	   $('.saveIcon').html('<a href="#" class ="down" onclick="filedown()"><i class="fas fa-regular fa-download fa-2xl" style="color: #287bff; font-size: 2.5em;"></i></a>');
+                	   $("#downpath").attr('value',zipPath);
+                   },
+                   error : function(){alert("error");}
+                });
+        };
+        
+       	
         // MenuToggle
         let toggle = document.querySelector('.toggle');
         let navigation = document.querySelector('.navigation');
@@ -211,7 +316,7 @@
         toggle.onclick = function(){
             navigation.classList.toggle('active');
             main.classList.toggle('active');
-        }
+        };
 
         // add hovered class in selected list item
         let list = document.querySelectorAll('.navigation li');
@@ -219,11 +324,10 @@
             list.forEach((item) =>
             item.classList.remove('hovered')); 
             this.classList.add('hovered')
-        }
+        };
         list.forEach((item) =>
         item.addEventListener('mouseover',activeLink));
-        
+
         
     </script>
 </body>
-</html>

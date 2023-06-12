@@ -29,7 +29,7 @@
         height: 100vh;
         letter-spacing: 0.1em;
         text-transform: uppercase;
-        margin-left : 800px ;
+        margin-left : 1000px ;
     }
     </style>
     

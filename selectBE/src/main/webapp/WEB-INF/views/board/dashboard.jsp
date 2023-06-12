@@ -4,6 +4,9 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.peachs.entity.Csv"%>
 <%@page import="java.util.HashMap" %>
+<%@page import="java.util.Set"%>
+<%@page import="java.util.Collections"%>
+<%@page import="java.util.Iterator"%>
 <%@ taglib prefix ="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix ="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix ="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
@@ -189,11 +192,16 @@ for (Csv csv : contents) {
                 <a href="${cpath}/dashboard" class="custom-button">Metadata</a>
             </div>
             <div class="tap">
-                <a href="${cpath}/dashboard_model" class="custom-button">Model metric</a>
+                <a href="${cpath}/dashboard_model" class="custom-button">ImageView</a>
             </div>
             
         </div>
-
+<% 
+Set set = labelCountMap.keySet();
+Iterator iterator = set.iterator();
+ArrayList<String> labels = new ArrayList<>(set);
+Collections.sort(labels);
+%>
         <div class="optionContainer">
             <div class="optionKey">
                 <div class="option1">
@@ -202,10 +210,10 @@ for (Csv csv : contents) {
                     </div>
                     <div class="optionKey1">원본 데이터</div>
                     <div class="optionKey1_value">
-                        <div class="optionValue1"><ion-icon name="server-outline"></ion-icon> 라벨 개수</div>
+                        <div class="optionValue1"><ion-icon name="server-outline"></ion-icon>data quantity : <%=contents.size()%></div>
                     </div>
                     <div class="optionKey1_data">
-                        <div class="optionValue1"><ion-icon name="server-outline"></ion-icon> 종횡비 </div>
+                        <div class="optionValue1"><ion-icon name="server-outline"></ion-icon>Labels : <%=labels.size() %> </div>
                     </div>
                 </div>
 

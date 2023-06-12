@@ -63,6 +63,7 @@ body
     margin-bottom: 40px;
     pointer-events: none;
 }
+
 .navigation ul li a
 {
     position: relative;
@@ -101,6 +102,12 @@ body
     white-space: nowrap;
 }
 
+/* 메뉴 클릭시 엑티브 고정 */
+.navigation li:hover, li.navigation.active{
+    background: var(white);
+    color: var(blue);
+}
+
 /* curve outside */
 
 .navigation ul li:hover a::before,
@@ -128,7 +135,7 @@ body
     height: 50px;
     background: transparent;
     border-radius: 50%;
-    box-shadow: 35px -35px 0 10px var(--white);
+    box-shadow: 35px -24px 0 6px var(--white);
     pointer-events: none;
 }
 
@@ -302,11 +309,14 @@ body
 }
 
 .titleBox p{
-	font-size: 1.1em;
+   font-size: 1.1em;
 }
+.selectBox p{
+    font-size: 1.5rem;
+ }
 
 .sbtn{
-	background: var(--white);
+   background: var(--white);
     /* box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08); */
     /* box-shadow: 0px 0px 10px 0px #287bff; */
     cursor: pointer;
@@ -319,7 +329,7 @@ body
 }
 
 .sbtn:hover{
-	background: var(--blue);
+   background: var(--blue);
     color: var(--white);
 }
 .optionHead .tap a
@@ -327,7 +337,7 @@ body
     color: var(--black); 
 }
 
-.optionHead .tap:first-child
+.optionHead .tap 
 {
    /* padding-left: 20px;*/
    padding-top: 5px;
@@ -347,7 +357,7 @@ body
     padding: 20px;
     min-height: 400px;
     display: grid;
-    grid-template-columns: 20% 40% 40%;
+    grid-template-columns: 1fr 2fr 2fr;
 }
 .pictureTable{
     height: 420px;
@@ -370,7 +380,7 @@ body
 }
 
 .pictureList{
-	width : 330px;
+   width : 315px;
     box-shadow: 0 7px 25px rgba(0,0,0,0.08);
     border-radius: 2px;
 }
@@ -382,7 +392,7 @@ body
     transform: scale(1.1);
 }
 .pictureTable{
-    width: 330px;
+    width: 310px;
 }
 
 .image{
@@ -395,16 +405,27 @@ body
     align-items: center;
     padding-top: 50px;
   }
-  .imgtable img{
+.imgtable img{
     height: 20em;
     object-fit:contain;
-  }
+}
+
+.cimgtable{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 50px;
+}
+.cimgtable img{
+    height: 20em;
+    object-fit:contain;
+}
 
 .titleBox{
     height:30px;
 }
 .titleBox p{
-	font-size: 1.5rem;
+   font-size: 1.5rem;
 }
 .graphBox .box2
 {
@@ -413,7 +434,6 @@ body
     padding: 20px;
     width: 95%;
     height:650px;
-    margin-left:30px;
     box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
     border-radius: 20px;
 }
@@ -425,9 +445,56 @@ body
     padding: 20px;
     width: 95%;
     height:650px;
-    margin-left:30px;
     box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
     border-radius: 20px;
+}
+/* 저장 버튼 */
+.saveAll{
+    cursor: pointer;
+    text-align: center;
+    width: 100px;
+    height: 45px;
+    border-radius: 30px;
+    border: 2px solid var(--blue);
+    background: #fff;
+    float: right;
+}
+/* 비율 선택 박스 */
+.selectBox select{
+    width: 26%; 
+    padding: .8em 1em; 
+    border: 1px solid var(--blue);
+    font-family: inherit;  
+    background: #fff url('../dashboard.img/caret-down-outline.svg') no-repeat 95% 50%; 
+    color: var(--black1);
+    border-radius: 2px;
+    float: right; 
+    /* -webkit-appearance: none; 
+    -moz-appearance: none;
+    appearance: none; */
+    }
+
+.selectBox option{
+    background: #eee;
+    /* color: #222; */
+}
+
+.select option[value=""][disabled] {
+   display: none;
+}
+
+.select option[value=""][abled] {
+   border: 1px solid var(--blue);
+}
+.saveAll:hover{
+    background: var(--blue);
+     color: var(--white);
+ }
+
+/* 저장 아이콘 */
+.box3 .saveIcon{
+    float: right;
+    cursor: pointer;
 }
 .cardHeader 
 {

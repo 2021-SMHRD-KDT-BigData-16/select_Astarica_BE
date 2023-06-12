@@ -128,7 +128,7 @@ body
     height: 50px;
     background: transparent;
     border-radius: 50%;
-    box-shadow: 29px 29px 0  var(--white);
+    box-shadow: 35px 35px 0 10px var(--white);
     pointer-events: none;
 }
 .navigation ul li:hover a::after,
@@ -142,7 +142,7 @@ body
     height: 50px;
     background: transparent;
     border-radius: 50%;
-    box-shadow: 29px -29px 0  var(--white);
+    box-shadow: 35px -24px 0 6px var(--white);
     pointer-events: none;
 }
 
