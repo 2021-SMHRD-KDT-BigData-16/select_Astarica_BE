@@ -591,3 +591,11 @@ a{
         left: 0;
     }
 }
+
+.optionKey1{
+    font-family: 'Happiness-Sans-Bold';
+    font-weight: 600;
+}
+.optionKey2{
+    font-family: 'Happiness-Sans-Bold';
+}

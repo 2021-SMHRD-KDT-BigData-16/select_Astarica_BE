@@ -309,7 +309,7 @@ body
 .optionHead .tap
 {
    /* padding-left: 20px;*/
-   padding-top: 5px;
+   padding-top: 7px;
 }
 
 .optionHead .tap:hover
@@ -492,7 +492,7 @@ a{
 	margin-left : 30px;
 }
 #ctx1{
-	margin-left : 70px;
+	margin-left : 150px;
 }
 
 
@@ -503,7 +503,7 @@ canvas .check1{
 
 
 canvas .check2{
-	width : 25% !important;  
+	width : 50% !important;  
 	margin-left : 70px !important;
 }
 
@@ -511,4 +511,13 @@ canvas .check2{
 canvas .check3{
 	width : 40% !important;  
 	margin-left : 70px !important;
+}
+
+.optionKey1{
+    font-family: 'Happiness-Sans-Bold';
+    font-weight: 600;
+}
+.optionKey2{
+    font-family: 'Happiness-Sans-Bold';
+    font-weight: 600;
 }

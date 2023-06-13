@@ -17,7 +17,15 @@
         #my-input {
             visibility: hidden;
         }
+        @font-face {
+            font-family: 'MBC1961M';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-01@1.0/MBC1961M.woff2') format('woff2');
+            font-weight: normal;
+            
+            font-style: normal;
+        }
     </style>
+    
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -85,7 +93,7 @@ for (Csv csv : contents) {
             <ul>
                 <li>
                     <a href="${cpath}/mainpage">
-                        <span class="icon"><i class="fa-solid fa-star-of-life" style="color: #ffffff;"></i></span>
+                        <span class="icon"><i class="fa-solid fa-star-of-life fa-2xl" style="color: #ffffff;"></i></span>
                         <span class="title"><h2 class="logo-title">Select Astarica</h2></span>
                     </a>
                 </li>
@@ -131,7 +139,7 @@ for (Csv csv : contents) {
 
               <!-- userImg -->
               <div class="user">
-                <img src="../dashboard.img/user.jpg">
+                <img src="${cpath}/resources/images/user.png">
               </div>
             </div>
         
@@ -198,9 +206,13 @@ for (Csv csv : contents) {
         </div>
 <% 
 Set set = labelCountMap.keySet();
-Iterator iterator = set.iterator();
+Iterator iterator1 = set.iterator();
 ArrayList<String> labels = new ArrayList<>(set);
 Collections.sort(labels);
+
+Set ratioset = ratioCountMap.keySet();
+Iterator iterator2 = ratioset.iterator();
+ArrayList<String> ratioss = new ArrayList<>(set);
 %>
         <div class="optionContainer">
             <div class="optionKey">
@@ -221,12 +233,12 @@ Collections.sort(labels);
                     <div class="check">
                         <input type="radio" value="check2" name="check" />
                     </div>
-                    <div class="optionKey2">체크1</div>
+                    <div class="optionKey2">Ascept Ratio</div>
                     <div class="optionKey2_value">
-                        <div class="optionValue2"><ion-icon name="server-outline"></ion-icon> Value: 0</div>
+                        <div class="optionValue2"><ion-icon name="server-outline"></ion-icon>data quantity : <%=contents.size()%></div>
                     </div>
                     <div class="optionKey2_data">
-                        <div class="optionValue2"><ion-icon name="server-outline"></ion-icon> Data: 0</div>
+                        <div class="optionValue2"><ion-icon name="server-outline"></ion-icon> Ratios : <%=ratioCountMap.size()%></div>
                     </div>
                 </div>
 
@@ -372,7 +384,7 @@ Collections.sort(labels);
             const className = document.getElementById('ctx').getAttribute("class")
             
             if (className == 'check1') {
-            	
+                	$("#box").css("height","50vh");            	
                 new Chart(ctx, {
                     type: 'bar',
                     data: {
@@ -436,17 +448,24 @@ Collections.sort(labels);
                         },
                         title: {
                           display: true,
-                          text: '나나난',
+                          text: 'Label Bar Chart',
                           font : {
                     		  size : 20
                     	  }
                           
                         }
-                      }
+                      },
+                      elements: {
+                          	line: {
+                            	borderCapStyle: 'round', // 선 끝을 둥글게
+	                            borderJoinStyle: 'bevel', // 꺾이는 모서리를 둥글게
+    	                      }        
+                        }
                 }
             });
             
                 new Chart(ctx1, {
+                	
                 	type: 'doughnut',
                     data: {
                     	labels: labels,
@@ -478,16 +497,23 @@ Collections.sort(labels);
                     				  size  : 20
                     			  }
                     		  },
+                    		  gridLines:{
+                    			  display:false,
+                    		  }
                     	  },
                         // y축 옵션
-                        y: {
+                        yAxes: {
                     		  ticks :{
                     			  font :{
                     				  size  : 20
                     			  }
                     		  },
+                    		  gridLines: { 
+                                  // grid line 설정
+                                  display: false, 
+                                },
                           // y축이 0에서 시작하도록 지정
-                          beginAtZero: true,
+                          beginAtZero: false,
                           // 반응형 차트
 	                      reponsive: false,
                         }
@@ -499,14 +525,14 @@ Collections.sort(labels);
                           labels : {
                         	 /*usePointStyle: true,*/
                               font : {
-                        		  size : 20
+                        		  size : 13
                         	  }
                           }
 
                         },
                         title: {
                           display: true,
-                          text: '라벨값 별~',
+                          text: 'Label Pie Chart',
                           font : {
                     		  size : 20
                     	  }
@@ -519,48 +545,56 @@ Collections.sort(labels);
           	
                 
             } else if (className == 'check2') {
+            	$("#box").css("height","55vh");
                 new Chart(ctx, {
-                    type: 'bar',
+                    type: 'polarArea',
                     data: {
-                        labels: ['Total', 'paper', 'pack', 'can', 'plastic', 'pet', 'glass', 'vinly'],
+                        labels: ratios,
                         datasets: [{
-                            label: 'Reusable Trash',
-                            data: [1900, 1800, 1750, 300, 1700, 1800, 1850, 1750],
+                            label: 'Ratio',
+                            data: ratio_data,
                             // 데이터셋 배경 색상
                             backgroundColor: [
-                            'rgba(255, 99, 132, 1)',
-                            'rgba(54, 162, 235, 1)',
-                            'rgba(255, 206, 86, 1)',
-                            'rgba(75, 192, 192, 1)',
-                            'rgba(153, 102, 255, 1)',
-                            'rgba(255, 159, 64, 1)',
-                            'rgba(255, 99, 132, 1)',
-                            'rgba(54, 162, 235, 1)'
+                            transparentize('rgb(255, 99, 132)', 0.5),
+                            transparentize('rgb(255, 159, 64)', 0.5),
+                            transparentize('rgb(255, 205, 86)', 0.5),
+                            transparentize('rgb(75, 192, 192)', 0.5),
+                            transparentize('rgb(54, 162, 235)', 0.5),
+                            
+                            transparentize('rgb(153, 102, 255)', 0.5),
+                            transparentize('rgb(201, 203, 207)', 0.5),
+                            transparentize('rgb(66, 129, 255)', 0.5)
+                            
                             ],
-                            // 테두리 색상 설정
-                            borderColor: [
-                                'rgba(255, 99, 132, 1)',
-                                'rgba(54, 162, 235, 1)',
-                                'rgba(255, 206, 86, 1)'
-                            ],
-
                         }]
                     },
                     // 차트의 옵션 설정
                     options: {
-                        // 차트가 반응형으로 동작하도록 하기
-                        maintainAspectRatio :false,
-                        
-                        plugins: {
-                            legend: {
-                              position: 'top',
-                            },
-                            title: {
+                        responsive: true,
+                        scales: {
+                          r: {
+                            pointLabels: {
                               display: true,
-                              text: '제목'
+                              centerPointLabels: true,
+                              font: {
+                                size: 18
+                              }
                             }
                           }
-                    }
+                        },
+                        plugins: {
+                          legend: {
+                            position: 'right',
+                          },
+                          title: {
+                            display: true,
+                            text: 'Ascept Ratio',
+                            font : {
+                      		  size : 20
+                      	  	}
+                          }
+                        }
+                      },
                 });
             }
         });

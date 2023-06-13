@@ -976,6 +976,13 @@ a{
 .image{
     margin-top: 5px;
 }
+.optionKey1{
+    font-family: 'Happiness-Sans-Bold';
+    font-weight: 600;
+}
+.optionKey2{
+    font-family: 'Happiness-Sans-Bold';
+}
 
 
 

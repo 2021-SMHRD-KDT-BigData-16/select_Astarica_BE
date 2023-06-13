@@ -13,6 +13,13 @@
         #my-input {
             visibility: hidden;
         }
+        @font-face {
+            font-family: 'MBC1961M';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-01@1.0/MBC1961M.woff2') format('woff2');
+            font-weight: normal;
+            
+            font-style: normal;
+        }
         #loading {
         background: var(--white);
         color: var(--blue);
@@ -40,12 +47,12 @@
             <ul>
                 <li>
                     <a href="${cpath}/mainpage">
-                        <span class="icon"><i class="fa-solid fa-star-of-life fa-lg" style="color: #ffffff;"></i></span>
+                        <span class="icon"><i class="fa-solid fa-star-of-life fa-2xl" style="color: #ffffff;"></i></span>
                         
                         <span class="title"><h2 class="logo-title">Select Astarica</h2></span>
                     </a>
                 </li>
-                <li>
+                <li> 
                     <a href="${cpath}/mainpage">
                         <span class="icon"><ion-icon name="home-outline"></ion-icon></span>
                         <span class="title">HOME</span>
@@ -57,6 +64,7 @@
                         <span class="title">Dashboard</span>
                     </a>
                 </li>
+                
                 <li>
                     <a href="${cpath}/analysis">
                         <span class="icon"><ion-icon name="documents-outline"></ion-icon></span>
@@ -81,13 +89,13 @@
               <!-- Header -->
               <div class="temHeader">
                 <div class="dataName">
-                     <p>Dataset Name</p>
+                     <p>${file_name}</p>
                 </div>
             </div>
 
               <!-- userImg -->
               <div class="user">
-                <img src="../dashboard.img/user.jpg">
+                <img src="${cpath}/resources/images/user.png">
               </div>
             </div>
         
@@ -198,7 +206,7 @@
                         <button class="saveAll" onclick="dataBuild()">Building data</button>
                         <!-- 저장 아이콘 -->
                         <div class="saveIcon">
-                            
+                            <a href="#" class ="down" onclick="filedown()"><i class="fas fa-regular fa-download fa-2xl" style="color: #287bff;"></i></a>
                         </div>
                         <div class="cimgtable" id="cimgtable"></div>
                     </div> 
@@ -231,7 +239,7 @@
     $(document).ready(function(){
       
          $('#loading').hide(); //첫 시작시 로딩바를 숨겨준다.
-         
+         $('.down').hide();
       });
     	function filedown(){
     		var fileFrm = $("#file_frm");
@@ -251,6 +259,7 @@
          var value = $("#bgvalue option:selected").val();
          $("#bgvalue").attr("value",value);
       }
+      // 배율 확인 기능 ajax
       function submitF(){
           var imageName = $("#imageName").val();
           var imagePath = $("#imagePath").val();
@@ -263,6 +272,7 @@
                      //통신을 시작할때 처리
                      $('#loading').show();
                      $('.saveAll').show();
+                     $('.down').hide();
                      
                 },
                   complete: function() {
@@ -300,9 +310,8 @@
                 	   var zipPath = data['zipPath'];
                 	   console.log(zipPath);
                 	   $('.saveAll').hide();
-                	   //$('.saveIcon').html('<a href="#" class ="down" onclick="filedown()"><i class="fas fa-regular fa-download fa-2xl" style="color: #287bff; font-size: 2.5em;"></i></a>');
-                	   $('.saveIcon').html('<a href="#" class ="down" onclick="filedown()"><button class="sbtn">download</button></a>');
                 	   $("#downpath").attr('value',zipPath);
+                	   $('.down').show();
                 	   console.log($("#downpath").val());
                    },
                    error : function(){alert("error");}

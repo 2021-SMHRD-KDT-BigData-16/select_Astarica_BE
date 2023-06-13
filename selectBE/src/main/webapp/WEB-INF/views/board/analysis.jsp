@@ -27,6 +27,13 @@
       .deactive{
    		 display: none;
   		}
+  		@font-face {
+            font-family: 'MBC1961M';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-01@1.0/MBC1961M.woff2') format('woff2');
+            font-weight: normal;
+            
+            font-style: normal;
+        }
     </style>
 </head>
 <body>
@@ -35,7 +42,7 @@
             <ul>
                 <li>
                     <a href="${cpath}/mainpage">
-                        <span class="icon"><i class="fa-solid fa-star-of-life" style="color: #ffffff;"></i></span>
+                        <span class="icon"><i class="fa-solid fa-star-of-life fa-2xl" style="color: #ffffff;"></i></span>
                         <span class="title"><h2 class="logo-title">Select Astarica</h2></span>
                     </a>
                 </li>
@@ -80,7 +87,7 @@
               </div>
               <!-- userImg -->
               <div class="user">
-                <img src="../dashboard.img/user.jpg">
+                <img src="${cpath}/resources/images/user.png">
               </div>
         </div>
 
@@ -155,7 +162,7 @@
                         <div class="displayquery">                    
                             <h3>Display-query</h3> 
                         </div> 
-                                <h>List of queries to configure display view.</h>
+                                
                                 <thead>
                                 <% ArrayList<Csv> contents = (ArrayList<Csv>) session.getAttribute("csv");%>
                                     <div class="querylist">                    

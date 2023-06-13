@@ -340,7 +340,7 @@ body
 .optionHead .tap 
 {
    /* padding-left: 20px;*/
-   padding-top: 5px;
+   padding-top: 7px;
 }
 
 .optionHead .tap:hover
@@ -381,8 +381,8 @@ body
 
 .pictureList{
    width : 315px;
-    box-shadow: 0 7px 25px rgba(0,0,0,0.08);
-    border-radius: 2px;
+   background: #fff;
+   border-radius: 2px;
 }
 .pictureList img {
     cursor: pointer;
@@ -598,4 +598,12 @@ a{
         width: 100%;
         left: 0;
     }
+}
+
+.optionKey1{
+    font-family: 'Happiness-Sans-Bold';
+    font-weight: 600;
+}
+.optionKey2{
+    font-family: 'Happiness-Sans-Bold';
 }

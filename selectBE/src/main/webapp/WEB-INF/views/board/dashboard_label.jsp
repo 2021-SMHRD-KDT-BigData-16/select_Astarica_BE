@@ -11,6 +11,7 @@
         #my-input {
             visibility: hidden;
         }
+        
     </style>
 <head>
     <meta charset="UTF-8">
@@ -26,7 +27,7 @@
             <ul>
                 <li>
                     <a href="${cpath}/mainpage">
-                        <span class="icon"><i class="fa-solid fa-star-of-life" style="color: #ffffff;"></i></span>
+                        <span class="icon"><i class="fa-solid fa-star-of-life fa-2xl" style="color: #ffffff;"></i></span>
                         <span class="title"><h2 class="logo-title">Select Astarica</h2></span>
                     </a>
                 </li>
@@ -72,7 +73,7 @@
 
               <!-- userImg -->
               <div class="user">
-                <img src="${cpath}/resources/images/user.jpg">
+                <img src="${cpath}/resources/images/user.png">
               </div>
             </div>
         
