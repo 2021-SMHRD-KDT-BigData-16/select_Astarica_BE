@@ -403,8 +403,21 @@ Collections.sort(labels);
                     // 차트의 옵션 설정
                     options: {
                       scales: {
+                    	  // x 축옵션
+                    	   xAxes : {
+                    		  ticks :{
+                    			  font :{
+                    				  size  : 20
+                    			  }
+                    		  },
+                    	  },
                         // y축 옵션
                         y: {
+                  		  ticks :{
+                			  font :{
+                				  size  : 20
+                			  }
+                		  },
                           // y축이 0에서 시작하도록 지정
                           beginAtZero: true,
                           // 반응형 차트
@@ -414,10 +427,20 @@ Collections.sort(labels);
                     plugins: {
                         legend: {
                           position: 'top',
+                          labels : {
+                              font : {
+                        		  size : 20
+                        	  }
+                          }
+
                         },
                         title: {
                           display: true,
-                          text: '제목1'
+                          text: '나나난',
+                          font : {
+                    		  size : 20
+                    	  }
+                          
                         }
                       }
                 }
@@ -449,8 +472,20 @@ Collections.sort(labels);
                     // 차트의 옵션 설정
                     options: {
                       scales: {
+                    	  xAxes : {
+                    		  ticks :{
+                    			  font :{
+                    				  size  : 20
+                    			  }
+                    		  },
+                    	  },
                         // y축 옵션
                         y: {
+                    		  ticks :{
+                    			  font :{
+                    				  size  : 20
+                    			  }
+                    		  },
                           // y축이 0에서 시작하도록 지정
                           beginAtZero: true,
                           // 반응형 차트
@@ -462,13 +497,19 @@ Collections.sort(labels);
                         legend: {
                           position: 'top',
                           labels : {
-                        	  fontSize : 16
+                        	 /*usePointStyle: true,*/
+                              font : {
+                        		  size : 20
+                        	  }
                           }
+
                         },
                         title: {
                           display: true,
-                          text: '제목2',
-                          fontSize: 50
+                          text: '라벨값 별~',
+                          font : {
+                    		  size : 20
+                    	  }
                         }
                       }
                 }
