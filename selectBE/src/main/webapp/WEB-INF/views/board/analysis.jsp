@@ -309,6 +309,8 @@
 
 		<form action="">
 			<input type='hidden' id='fileName' name='fileName' value="${file_name}">
+			<input type='hidden' id='totalN' name='totalN' value="">
+			<input type='hidden' id='totalS' name='totalS' value="">
 		</form>
     </div>        
 </div>
@@ -319,132 +321,193 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.3.0/dist/chart.umd.min.js"></script>
     <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.0.min.js"></script> 
     <script type="text/javascript" charset="utf-8" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script> 
-    <script src="${cpath}/resources/js/analysis.js"></script>
+    <!--<script src="${cpath}/resources/js/analysis.js"></script>-->
     <script type="text/javascript">
  // MenuToggle
- 
-
     	let toggle = document.querySelector('.toggle');
-    	let navigation = document.querySelector('.navigation');
-    	let main = document.querySelector('.main');
+let navigation = document.querySelector('.navigation');
+let main = document.querySelector('.main');
 	
-	    toggle.onclick = function(){
-        	navigation.classList.toggle('active');
-        	main.classList.toggle('active');
-	    }
+toggle.onclick = function(){
+    navigation.classList.toggle('active');
+    main.classList.toggle('active');
+};
 
     	// add hovered class in selected list item
-    	let list = document.querySelectorAll('.navigation li');
-    	function activeLink(){
-        	list.forEach((item) =>
-        	item.classList.remove('hovered')); 
-        	this.classList.add('hovered')
-    	}
-    	list.forEach((item) =>
-    	item.addEventListener('mouseover',activeLink));
+let list = document.querySelectorAll('.navigation li');
+function activeLink(){
+    list.forEach((item) =>
+    item.classList.remove('hovered')); 
+    this.classList.add('hovered');
+;}
+list.forEach((item) =>
+item.addEventListener('mouseover',activeLink));
 
     	// 토오글 버튼 모두 선택쓰
-    	var allcheck = $('#myToggle');
-    	allcheck.click(function(){
-        	var checked = allcheck.is(":checked");
-        	if(checked){
-            	$('input:checkbox').prop("checked",true);
-            	if($('.pictureTable img').hasClass('deactive')){
-					$('.pictureTable img').removeClass('deactive')
-                	$('.pictureTable img').addClass('active')
-            	}
-        	}else{
-            	$('input:checkbox').prop("checked",false);
-            	if($('.pictureTable img').hasClass('active')){
-                	$('.pictureTable img').removeClass('active')
-                	$('.pictureTable img').addClass('deactive')
-            	}
-        	}
-    	});
-    	arr = [1,2,3,4,5,6,7];
-    	for (var i = 1; i < 8; i++) {
-        	arr[i]= makeFunction(i);
-    	}
+var allcheck = $('#myToggle');
+allcheck.click(function(){
+    var checked = allcheck.is(":checked");
+        if(checked){
+            $('input:checkbox').prop("checked",true);
+            if($('.pictureTable img').hasClass('deactive')){
+                $('.pictureTable img').removeClass('deactive')
+                $('.pictureTable img').addClass('active')
+            }
+        }else{
+            $('input:checkbox').prop("checked",false);
+            if($('.pictureTable img').hasClass('active')){
+                $('.pictureTable img').removeClass('active')
+                $('.pictureTable img').addClass('deactive')
+            }
+        }
+});
+arr = [1,2,3,4,5,6,7];
+for (var i = 1; i < 8; i++) {
+    arr[i]= makeFunction(i);
+};
 
-    	function makeFunction(index) {
-			var temp = "#toggle-" + index;
-        	var check2 = $(temp);
-        	check2.click(function () {
-    	        var checked = check2.is(":checked");
-	            var val2 = check2.val();
-            	var temp = "." + val2;
-        	    console.log(temp);
-            	var images = $(temp);
-            	console.log(images);
-            	if (checked) {
-	                if (images.hasClass("deactive")) {
-    	                images.removeClass("deactive");
-        	        }
-                	images.addClass("active");
-            	} else {
-                	if (images.hasClass("active")) {
-                    	images.removeClass("active");
-                	}
-                	images.addClass("deactive");
-	            }	
-        	});
-    	};
-    	function dataSend(){
-    		var fileName= $("#fileName").val();
-    		console.log(fileName);
-    		$.ajax({
-			      url: 'http://127.0.0.1:5000/score', // Flask 엔드포인트의 URL을 입력하세요.
-			      type: 'POST',
-			      data: {fileName: fileName},
-			      beforeSend: function() {
-			    	     //통신을 시작할때 처리
-			    	     $('#loading').show();
-			    	},
-			   		complete: function() {
-			    	        //통신이 완료된 후 처리
-			    	     $('#loading').hide();
-			    	},
-			      success: function(response) {
-			        // Ajax 요청이 성공적으로 완료되었을 때 실행할 코드를 작성합니다.
-			        console.log('Success:', response);
-			        // 예시 1: Ajax 응답 데이터를 컨트롤러로 전달하기
-			      },
-			      error: function(xhr, status, error) {
+function makeFunction(index) {
+	var temp = "#toggle-" + index;
+    var check2 = $(temp);
+    check2.click(function () {
+    	var checked = check2.is(":checked");
+	    var val2 = check2.val();
+        var temp = "." + val2;
+        console.log(temp);
+        var images = $(temp);
+        console.log(images);
+        if (checked) {
+            if (images.hasClass("deactive")) {
+                images.removeClass("deactive");
+            }
+                images.addClass("active");
+        } else {
+            if (images.hasClass("active")) {
+                images.removeClass("active");
+                }
+                images.addClass("deactive");
+            }	
+    });
+};
+function dataSend(){
+    var fileName= $("#fileName").val();
+    console.log(fileName);
+    $.ajax({
+        url: 'http://127.0.0.1:5000/score', // Flask 엔드포인트의 URL을 입력하세요.
+		type: 'POST',
+		data: {fileName: fileName},
+		beforeSend: function() {
+			     //통신을 시작할때 처리
+                $('#loading').show();
+		},
+		complete: function() {
+			        //통신이 완료된 후 처리
+			$('#loading').hide();
+        },
+		success: function(data) {
+            console.log('Success:', data);
+            var totalN = (data['uniformity']+data['compatibility']+data['sufficiency']+data['bbox'])/4
+			var totalS = totalN.toString();
+            $('#totalS').attr("value",totalS);
+            $('#totalN').attr("value",totalN);
+            console.log($("#totalN").val());
+            console.log($("#totalS").val());
+			        // 균일성
+			var uniformity = data['uniformity'].toString()+"%";
+			        // 적합성
+			var compatibility = data['compatibility'].toString()+"%";
+			        // 충분성
+			var sufficiency = data['sufficiency'].toString()+"%";
+			        // bbox
+			var bbox = data['bbox'].toString()+"%";
+			$("#tool1").text(uniformity);
+			$(".uniPer").css("width", uniformity);
+			
+			$("#tool2").text(sufficiency);
+			$(".suffiPer").css("width", sufficiency);
+			
+			$("#tool3").text(compatibility);
+			$(".suitPer").css("width", compatibility);
+			
+			$("#tool4").text(bbox);
+			$(".bboxPer").css("width", bbox);
+			var ctx = document.getElementById('chart').getContext('2d');
+			var score = $('#totalS').val(); // 예시로 85점을 설정하였습니다.
+			var chart = new Chart(ctx, 
+			    {
+			        type: 'doughnut',
+			        data: {
+			            datasets: [{
+			                data: [score, 100 - score],
+			                backgroundColor: ['#287bff', '#ccc'],
+			                borderWidth: 0
+			                }]
+			            },
+			        options: {
+			            cutoutPercentage: 70,
+			            rotation: 1 * Math.PI,
+			            circumference: 1 * Math.PI,
+			            responsive:false,
+			            legend: {
+			                display: false
+			            },
+			            tooltips: {
+			                enabled: false
+			            }
+			        }
+			});
+			Chart.pluginService.register({
+			    beforeDraw: function(chart) {
+			        var width = chart.chart.width,
+			        height = chart.chart.height,
+			        ctx = chart.chart.ctx;
+			        ctx.restore();
+			        ctx.font = "3.5rem 'MBC1961M'";
+			        ctx.textBaseline = "middle";
+			        var text = $('#totalS').val();
+			        textX = Math.round((width - ctx.measureText(text).width) / 2),
+			        textY = height / 1.35;
+			        ctx.fillText(text, textX, textY);
+			        ctx.save();
+			        }
+			});
+        },
+		error: function(xhr, status, error) {
 			        // Ajax 요청이 실패했을 때 실행할 코드를 작성합니다.
-			        console.error('Error:', error);
-			        $('#loading').hide();
-			      }
-			    });
-    	}
+			console.error('Error:', error);
+			$('#loading').hide();
+        }
+	});
+};
+    	
     // 이미지 확대 함수
-    	function enlargeImage(image) {
-	        $('.imgtable').html("<img>");
-    	    $('.imgtable img').attr('src',image.src);
-	        //var enlargedArea = document.getElementById('enlargedArea');
-    	    //var enlargedImg = document.getElementById('enlargedImg');
+function enlargeImage(image) {
+    $('.imgtable').html("<img>");
+    $('.imgtable img').attr('src',image.src);
+};	
 
-        //enlargedImg.src = image.src;
-        //enlargedArea.style.display = 'flex';
-    	};	
-		
+        // 반원 도넛 차트 안에 점수
+        
+
     // 버튼을 누르면 모달창 뜨게 하기
 
-    	const modal = document.getElementById("modal")
-    	const btnModal = document.getElementById("btn-modal")
-    	
-	    btnModal.addEventListener("click", e => {
-	    	
-        	modal.style.display = "flex"
-    	});
+const modal = document.getElementById("modal")
+const btnModal = document.getElementById("btn-modal")
+btnModal.addEventListener("click", e => {
+    modal.style.display = "flex"
+});
 	
     // 모달창 닫기 버튼 
-    	const closeBtn = modal.querySelector(".close-area")
-        	closeBtn.addEventListener("click", e => {
-        	modal.style.display = "none"
-    	});
-    
-    	
+const closeBtn = modal.querySelector(".close-area")
+closeBtn.addEventListener("click", e => {
+    modal.style.display = "none"
+});
 
-    </script>
+
+
+            // 반원 도넛 차트 안에 점수
+
+
+	</script>
 </body>
 </html>
