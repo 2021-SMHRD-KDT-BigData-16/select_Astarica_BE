@@ -32,8 +32,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Select *</title>
     <link rel="stylesheet" href="${cpath}/resources/css/dashboard_model.css">
-    <script src="https://kit.fontawesome.com/7872e4b
-    187.js" crossorigin="anonymous"></script>
+    <!--<script src="https://kit.fontawesome.com/7872e4b187.js" crossorigin="anonymous"></script> -->
 </head>
 <body>
 <div class="container">
@@ -299,9 +298,12 @@
                  	},
                    success : function(data){
                 	   var zipPath = data['zipPath'];
+                	   console.log(zipPath);
                 	   $('.saveAll').hide();
-                	   $('.saveIcon').html('<a href="#" class ="down" onclick="filedown()"><i class="fas fa-regular fa-download fa-2xl" style="color: #287bff; font-size: 2.5em;"></i></a>');
+                	   //$('.saveIcon').html('<a href="#" class ="down" onclick="filedown()"><i class="fas fa-regular fa-download fa-2xl" style="color: #287bff; font-size: 2.5em;"></i></a>');
+                	   $('.saveIcon').html('<a href="#" class ="down" onclick="filedown()"><button class="sbtn">download</button></a>');
                 	   $("#downpath").attr('value',zipPath);
+                	   console.log($("#downpath").val());
                    },
                    error : function(){alert("error");}
                 });

@@ -74,7 +74,8 @@ public class UploadController {
 	@GetMapping("/download")
 	public void download(HttpServletResponse response,HttpServletRequest request) throws Exception {
         try {
-        	String path = request.getParameter("downpath"); // 경로에 접근할 때 역슬래시('\') 사용
+        	String path = request.getParameter("downpath"); 
+        	
         	
         	File file = new File(path);
         	response.setHeader("Content-Disposition", "attachment;filename=" + file.getName()); // 다운로드 되거나 로컬에 저장되는 용도로 쓰이는지를 알려주는 헤더

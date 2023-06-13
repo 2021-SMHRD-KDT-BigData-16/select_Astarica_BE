@@ -135,10 +135,10 @@ public class AccountsInfoController {
 			ArrayList<Csv> contents = new ArrayList<Csv>();
 			for(int i=0; i<jsonArray.length(); i++) {
 				element = (JSONObject) jsonArray.opt(i);
-				int path = element.getInt("imagePath");
-				String test = Integer.toString(path)+".jpg";
+				String path = element.getString("imagePath");
+				
 				Csv csv = new Csv();
-				csv.setImagePath(test);
+				csv.setImagePath(path);
 				csv.setLabel((String)element.get("label"));
 				csv.setPoint1_x(element.getInt("point1_x"));
 				csv.setPoint1_y(element.getInt("point1_y"));

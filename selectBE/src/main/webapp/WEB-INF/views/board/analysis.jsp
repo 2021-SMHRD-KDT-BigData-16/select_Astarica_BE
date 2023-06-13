@@ -398,7 +398,7 @@
 	    btnModal.addEventListener("click", e => {
         	modal.style.display = "flex"
     	});
-
+	
     // 모달창 닫기 버튼 
     	const closeBtn = modal.querySelector(".close-area")
         	closeBtn.addEventListener("click", e => {
