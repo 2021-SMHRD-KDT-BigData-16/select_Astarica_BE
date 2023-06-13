@@ -147,7 +147,7 @@
             <!-- 모달창 -->
             <div id="modalBox">
                 <div class="scoreBox">
-                    <button id="btn-modal">score</button> 
+                    <button id="btn-modal">Result</button> 
                 </div>
 
                 <div class="details2">
@@ -157,12 +157,12 @@
                             <h3>Display view</h3> 
                             <ion-icon name="chevron-back-outline"></ion-icon> 
                         </div>
+							<button id="btn-modal2" onclick="dataSend()">Score</button>
 
                     <ul>
                         <div class="displayquery">                    
                             <h3>Display-query</h3> 
                         </div> 
-                                
                                 <thead>
                                 <% ArrayList<Csv> contents = (ArrayList<Csv>) session.getAttribute("csv");%>
                                     <div class="querylist">                    
@@ -261,7 +261,7 @@
     
                 		<div class="skillBar">
                     		<span class="uniPer">
-    	                    	<span class="tooltip">70%</span>
+    	                    	<span class="tooltip" id="tool1"></span>
 	                    	</span>
         	        	</div>
             		</div>
@@ -269,7 +269,7 @@
     	            <span class="title">충분성</span>
                 	<div class="skillBar">
 	                    <span class="suffiPer">
-                        	<span class="tooltip">65%</span>
+                        	<span class="tooltip" id="tool2"></span>
                     	</span>
                 	</div>
 	            </div>
@@ -278,7 +278,7 @@
         	        <span class="title">적합성</span>
     	            <div class="skillBar">
 	                    <span class="suitPer">
-    	                    <span class="tooltip">80%</span>
+    	                    <span class="tooltip" id="tool3"></span>
         	            </span>
             	    </div>
             	</div>
@@ -287,7 +287,7 @@
 	                <span class="title">Bbox</span>    
                 	<div class="skillBar">
 	                    <span class="bboxPer">
-                        	<span class="tooltip">75%</span>
+                        	<span class="tooltip" id="tool4"></span>
                     	</span>
                 	</div>
             	</div>
@@ -307,10 +307,12 @@
                 </div>
             </div>
 
-
+		<form action="">
+			<input type='hidden' id='fileName' name='fileName' value="${file_name}">
+		</form>
     </div>        
 </div>
-
+	
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
     <script src="https://kit.fontawesome.com/6377d08cc4.js" crossorigin="anonymous"></script>
@@ -320,6 +322,8 @@
     <script src="${cpath}/resources/js/analysis.js"></script>
     <script type="text/javascript">
  // MenuToggle
+ 
+
     	let toggle = document.querySelector('.toggle');
     	let navigation = document.querySelector('.navigation');
     	let main = document.querySelector('.main');
@@ -385,6 +389,33 @@
 	            }	
         	});
     	};
+    	function dataSend(){
+    		var fileName= $("#fileName").val();
+    		console.log(fileName);
+    		$.ajax({
+			      url: 'http://127.0.0.1:5000/score', // Flask 엔드포인트의 URL을 입력하세요.
+			      type: 'POST',
+			      data: {fileName: fileName},
+			      beforeSend: function() {
+			    	     //통신을 시작할때 처리
+			    	     $('#loading').show();
+			    	},
+			   		complete: function() {
+			    	        //통신이 완료된 후 처리
+			    	     $('#loading').hide();
+			    	},
+			      success: function(response) {
+			        // Ajax 요청이 성공적으로 완료되었을 때 실행할 코드를 작성합니다.
+			        console.log('Success:', response);
+			        // 예시 1: Ajax 응답 데이터를 컨트롤러로 전달하기
+			      },
+			      error: function(xhr, status, error) {
+			        // Ajax 요청이 실패했을 때 실행할 코드를 작성합니다.
+			        console.error('Error:', error);
+			        $('#loading').hide();
+			      }
+			    });
+    	}
     // 이미지 확대 함수
     	function enlargeImage(image) {
 	        $('.imgtable').html("<img>");
@@ -395,14 +426,14 @@
         //enlargedImg.src = image.src;
         //enlargedArea.style.display = 'flex';
     	};	
-
-
-
+		
     // 버튼을 누르면 모달창 뜨게 하기
+
     	const modal = document.getElementById("modal")
     	const btnModal = document.getElementById("btn-modal")
     	
 	    btnModal.addEventListener("click", e => {
+	    	
         	modal.style.display = "flex"
     	});
 	
@@ -411,6 +442,9 @@
         	closeBtn.addEventListener("click", e => {
         	modal.style.display = "none"
     	});
+    
+    	
+
     </script>
 </body>
 </html>

@@ -158,7 +158,6 @@ public class AccountsInfoController {
 //				csv.setBwide(bwide_temp);
 				contents.add(csv);
 			}
-			
 			session.setAttribute("csv", contents);
 			session.setAttribute("file_name", filename);
 	        return "board/dashboard";

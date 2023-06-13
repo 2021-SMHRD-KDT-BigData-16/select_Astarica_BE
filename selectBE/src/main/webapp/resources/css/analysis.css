@@ -272,7 +272,10 @@ body
     width: 40px;
     height: 25px;
 }
-
+#btn-modal2{
+    width: 40px;
+    height: 25px;
+}
 
 .details2
 {
@@ -672,7 +675,7 @@ a{
     height: 35px;
     text-align: center;
     text-decoration: none;
-    display: inline-block;
+    display: inline;
     font-size: 16px;
     font-family: 'Happiness-Sans-Bold';
     cursor: pointer;
@@ -680,7 +683,29 @@ a{
     box-shadow: 0px 0px 5px 0px #287bff;
     float: right;
 }
+
 .scoreBox #btn-modal:hover{
+    color: var(--blue);
+    background: var(--white);
+}
+#btn-modal2{
+    background-color: var(--blue);
+    border: none;
+    color: var(--white);
+    width: 80px;
+    height: 35px;
+    text-align: center;
+    text-decoration: none;
+    display: inline;
+    font-size: 16px;
+    font-family: 'Happiness-Sans-Bold';
+    cursor: pointer;
+    border-radius: 20px;
+    box-shadow: 0px 0px 5px 0px #287bff;
+    float: right;
+}
+
+#btn-modal2:hover{
     color: var(--blue);
     background: var(--white);
 }
@@ -748,7 +773,7 @@ a{
     display: block;
     height: 100%;
     /* 점수 퍼센트만큼 width 설정하기 */
-    width: 70%;
+    
     border-radius: 6px;
     background: var(--blue);
     animation: progress 0.4s ease-in-out forwards;
@@ -759,7 +784,7 @@ a{
     display: block;
     height: 100%;
     /* 점수 퍼센트만큼 width 설정하기 */
-    width: 65%;
+    
     border-radius: 6px;
     background: var(--blue);
     animation: progress 0.4s ease-in-out forwards;
@@ -771,7 +796,7 @@ a{
     display: block;
     height: 100%;
     /* 점수 퍼센트만큼 width 설정하기 */
-    width: 80%;
+    
     border-radius: 6px;
     background: var(--blue);
     animation: progress 0.4s ease-in-out forwards;
@@ -783,7 +808,7 @@ a{
     display: block;
     height: 100%;
     /* 점수 퍼센트만큼 width 설정하기 */
-    width: 75%;
+    
     border-radius: 6px;
     background: var(--blue);
     animation: progress 0.4s ease-in-out forwards;

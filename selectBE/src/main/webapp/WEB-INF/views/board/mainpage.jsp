@@ -276,7 +276,7 @@
     		
     		   $('#loading').hide(); //첫 시작시 로딩바를 숨겨준다.
     		   
-    		})
+    		});
     	
     	
     	$(document).ready(function() {
