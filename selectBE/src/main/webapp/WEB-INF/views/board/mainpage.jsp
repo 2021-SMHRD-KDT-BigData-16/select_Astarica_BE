@@ -47,6 +47,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Select *</title>
+    <link rel="icon" href="${cpath}/resources/images/favi.png">
     <link rel="stylesheet" href="${cpath}/resources/css/home.css">
     <script src="https://kit.fontawesome.com/7872e4b187.js" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>

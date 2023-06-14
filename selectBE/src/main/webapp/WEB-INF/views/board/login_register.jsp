@@ -14,6 +14,7 @@
 <meta charset="UTF-8">
 
 <link rel="stylesheet" href="${cpath}/resources/css/login_register.css">
+<link rel="icon" href="${cpath}/resources/images/favi.png">
 <title>Insert title here</title>
 </head>
 <body>

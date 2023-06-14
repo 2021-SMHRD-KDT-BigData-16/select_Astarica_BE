@@ -31,6 +31,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Select *</title>
+    <link rel="icon" href="${cpath}/resources/images/favi.png"> 
     <link rel="stylesheet" href="${cpath}/resources/css/dashboard.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://kit.fontawesome.com/7872e4b187.js" crossorigin="anonymous"></script>
@@ -247,6 +248,7 @@ ArrayList<String> ratioss = new ArrayList<>(set);
             <!-- Add Charts -->
             <div class="graphBox">
                 <div id="box" class="bar" style="position: relative; height:40vh; width:86vw; display : flex;">
+                	
                 </div>
             </div>
             
@@ -375,7 +377,7 @@ ArrayList<String> ratioss = new ArrayList<>(set);
         $("input[name='check']:radio").change(function () {
             $('#box').children().remove(); // this is my <canvas> element
             $('#box').append('<canvas id="ctx" class="chart"><canvas>');
-            $('#box').append('<canvas id="ctx1" class="chart"><canvas>');
+            
             
             var value = this.value;
             $("#ctx").removeClass()
@@ -384,6 +386,8 @@ ArrayList<String> ratioss = new ArrayList<>(set);
             const className = document.getElementById('ctx').getAttribute("class")
             
             if (className == 'check1') {
+            		$('#box #textBox').remove()
+            		$('#box').append('<canvas id="ctx1" class="chart"><canvas>');
                 	$("#box").css("height","50vh");            	
                 new Chart(ctx, {
                     type: 'bar',
@@ -545,6 +549,31 @@ ArrayList<String> ratioss = new ArrayList<>(set);
           	
                 
             } else if (className == 'check2') {
+            	$('#box #ctx1').remove()
+            	$('#box').append('<div id="textBox"></div>');
+            	var html1 = `
+            	<div class="textContainer">
+            		<p class="textTitle">Ascept Ratio비율(%)</p>
+            		<div class="contents">
+                    <div class="text">
+                        <h2>Ascept Ratio</h2>
+                        <br>
+            			<div class="text2">
+            				<div>Bbox 이미지 면적</div>
+            				<br>
+            				<div>전체 이미지 면적</div>
+            				<br>
+            				<br>
+            				<p><ion-icon name="bulb-outline"></ion-icon> Select Astarica에서 진행한 실험 결과에 의하면, 동일한 파라미터로 모델 학습시 이미지의 비율에 따라 mAP지수의 값이 차이가 남.</p>
+            			</div>
+            			<div class="imgBox">
+                        	<img src="${cpath}/resources/images/bbox.jpg" alt="">
+                    	</div>
+                    </div>
+
+                </div>
+            </div>`
+            	$('#textBox').append(html1);
             	$("#box").css("height","55vh");
                 new Chart(ctx, {
                     type: 'polarArea',
@@ -596,6 +625,9 @@ ArrayList<String> ratioss = new ArrayList<>(set);
                         }
                       },
                 });
+                $('#box')
+                
+                
             }
         });
 

@@ -506,8 +506,52 @@ canvas .check2{
 	width : 50% !important;  
 	margin-left : 70px !important;
 }
-
-
+.textTitle{
+	font-family: 'Happiness-Sans-Bold';
+    font-weight: 600;
+    margin: 15px 20px;
+}
+.text{
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+}
+.imgBox img{
+	width:50%;
+	margin-top: 50px;
+	margin-left : 25px;
+	
+}
+#textBox{
+	width:45%;
+	margin-left:150px;
+	box-shadow: 0 7px 25px rgba(0,0,0,0.1);
+	border-radius: 25px;
+	background: var(--white);
+}
+.text h2{
+	
+	margin-left: 20px;
+}
+.text2{
+	margin-top: 200px; 
+	margin-left : 20px;
+}
+.text2 div{
+	display: inline-block;
+	text-align: center;
+	font-family: 'Happiness-Sans-Bold';
+    font-weight: 600;
+}
+.text2 div:first-child{
+	border-bottom: 1px solid black;
+}
+.text2 p{
+	font-family: 'Happiness-Sans-Bold';
+    font-weight: 500;
+}
+.text2 p ion-icon{
+	color: #FFB319;
+}
 canvas .check3{
 	width : 40% !important;  
 	margin-left : 70px !important;

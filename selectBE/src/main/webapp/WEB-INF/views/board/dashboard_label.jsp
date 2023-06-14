@@ -19,6 +19,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Select *</title>
     <link rel="stylesheet" href="${cpath}/resources/css/dashboard_label.css">
+    <link rel="icon" href="${cpath}/resources/images/favi.png">
     <script src="https://kit.fontawesome.com/7872e4b187.js" crossorigin="anonymous"></script>
 </head>
 <body>
