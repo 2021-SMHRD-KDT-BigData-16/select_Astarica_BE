@@ -234,7 +234,7 @@ ArrayList<String> ratioss = new ArrayList<>(set);
                     <div class="check">
                         <input type="radio" value="check2" name="check" />
                     </div>
-                    <div class="optionKey2">Ascept Ratio</div>
+                    <div class="optionKey2">Bbox Area Ratio</div>
                     <div class="optionKey2_value">
                         <div class="optionValue2"><ion-icon name="server-outline"></ion-icon>data quantity : <%=contents.size()%></div>
                     </div>
@@ -388,7 +388,7 @@ ArrayList<String> ratioss = new ArrayList<>(set);
             if (className == 'check1') {
             		$('#box #textBox').remove()
             		$('#box').append('<canvas id="ctx1" class="chart"><canvas>');
-                	$("#box").css("height","50vh");            	
+                	$("#box").css("height","45vh");            	
                 new Chart(ctx, {
                     type: 'bar',
                     data: {
@@ -553,10 +553,10 @@ ArrayList<String> ratioss = new ArrayList<>(set);
             	$('#box').append('<div id="textBox"></div>');
             	var html1 = `
             	<div class="textContainer">
-            		<p class="textTitle">Ascept Ratio비율(%)</p>
+            		
             		<div class="contents">
                     <div class="text">
-                        <h2>Ascept Ratio</h2>
+                        <h2>Bbox Area Ratio</h2>
                         <br>
             			<div class="text2">
             				<div>Bbox 이미지 면적</div>
@@ -617,7 +617,7 @@ ArrayList<String> ratioss = new ArrayList<>(set);
                           },
                           title: {
                             display: true,
-                            text: 'Ascept Ratio',
+                            text: 'Bbox Area Ratio',
                             font : {
                       		  size : 20
                       	  	}

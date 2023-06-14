@@ -67,7 +67,7 @@ public class UploadController {
 		data.setOd_path(filePath);
 		o_mapper.insert(data);
 		List<OriginDataInfo> works = o_mapper.getLists(user);
-		model.addAttribute("works", works);
+		session.setAttribute("works", works);
 		return "board/mainpage";
 	}
 	
